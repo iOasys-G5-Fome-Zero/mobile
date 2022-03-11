@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "FomeZero",
+    "slug": "FomeZero",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
