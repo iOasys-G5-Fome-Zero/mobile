@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 // components
-import { Container, Title } from "./styles";
+import { Container, Title } from './styles';
 
 const AboutConsumer: React.FC = () => {
   return (
