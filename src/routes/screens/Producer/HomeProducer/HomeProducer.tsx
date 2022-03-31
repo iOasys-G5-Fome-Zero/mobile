@@ -1,13 +1,13 @@
 import React from 'react';
 
 // components
-import { Container, Title } from './styles';
+import { StyledContainer, StyledTitle } from './styles';
 
 const HomeProducer: React.FC = () => {
   return (
-    <Container>
-      <Title>Home Producer</Title>
-    </Container>
+    <StyledContainer>
+      <StyledTitle>Home Producer</StyledTitle>
+    </StyledContainer>
   );
 };
 

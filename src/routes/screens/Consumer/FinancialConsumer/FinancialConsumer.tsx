@@ -1,13 +1,13 @@
 import React from 'react';
 
 // components
-import { Container, Title } from './styles';
+import { StyledTitle, StyledContainer } from './styles';
 
 const FinancialConsumer: React.FC = () => {
   return (
-    <Container>
-      <Title>Financial Consumer</Title>
-    </Container>
+    <StyledContainer>
+      <StyledTitle>Financial Consumer</StyledTitle>
+    </StyledContainer>
   );
 };
 
