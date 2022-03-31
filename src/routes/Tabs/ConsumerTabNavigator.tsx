@@ -2,9 +2,9 @@ import * as React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 // screens
-import HomeProducer from '../screens/Producer/HomeProducer/HomeProducer';
-import FinancialProducer from '../screens/Producer/FinancialProducer/FinancialProducer';
-import AboutProducer from '../screens/Producer/AboutProducer/AboutProducer';
+import HomeConsumer from '../screens/Consumer/HomeConsumer/HomeConsumer';
+import FinancialConsumer from '../screens/Consumer/FinancialConsumer/FinancialConsumer';
+import AboutConsumer from '../screens/Consumer/AboutConsumer/AboutConsumer';
 
 export type TabConsumerStackParams = {
   HomeConsumer: undefined;
@@ -21,9 +21,9 @@ const ConsumerTabNavigator: React.FC = () => {
       inactiveColor='#C4C4C4'
       barStyle={{ backgroundColor: '#FFFFFF' }}
     >
-      <Tab.Screen name='Home' component={HomeProducer} />
-      <Tab.Screen name='Financial' component={FinancialProducer} />
-      <Tab.Screen name='About' component={AboutProducer} />
+      <Tab.Screen name='Home' component={HomeConsumer} />
+      <Tab.Screen name='Financial' component={FinancialConsumer} />
+      <Tab.Screen name='About' component={AboutConsumer} />
     </Tab.Navigator>
   );
 };
