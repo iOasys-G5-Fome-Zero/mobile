@@ -50,24 +50,21 @@ const Login: React.FC = () => {
         password: data.password
       });
 
-      prettyLog(dataUser);
-
       setToken(dataUser);
       handleNavigation(dataUser.user_type);
 
       setError(false);
     } catch (err) {
       setError(true);
-      // handleError(err);
     }
   };
 
-  const handleNavigation = (user: string) => {
-    if (user === 'buyer') {
+  const handleNavigation = (userType: string) => {
+    if (userType === 'buyer') {
       navigation.navigate('ConsumerTabNavigator');
     }
 
-    if (user === 'seller') {
+    if (userType === 'seller') {
       navigation.navigate('ProducerTabNavigator');
     }
   };
@@ -148,7 +145,9 @@ const Login: React.FC = () => {
         <StyledRow>
           <StyledText>Ainda não tem uma conta? </StyledText>
           <StyledButtonContainer>
-            <StyledText bold>Cadastre-se aqui</StyledText>
+            <StyledText bold onPress={() => navigation.navigate('Register')}>
+              Cadastre-se aqui
+            </StyledText>
           </StyledButtonContainer>
         </StyledRow>
         <StyledRow>
