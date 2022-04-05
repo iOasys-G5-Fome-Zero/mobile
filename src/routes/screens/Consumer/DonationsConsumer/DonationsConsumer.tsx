@@ -3,7 +3,7 @@ import React from 'react';
 // components
 import { StyledTitle, StyledContainer } from './styles';
 
-const FinancialConsumer: React.FC = () => {
+const DonationConsumer: React.FC = () => {
   return (
     <StyledContainer>
       <StyledTitle>Financial Consumer</StyledTitle>
@@ -11,4 +11,4 @@ const FinancialConsumer: React.FC = () => {
   );
 };
 
-export default FinancialConsumer;
+export default DonationConsumer;

@@ -1,11 +1,15 @@
 const themeDefault = {
-  font: {},
+  fonts: {
+    HEADLINE: 'HEADLINE'
+  },
   colors: {
     gray: '#c4c4c4',
     lightGray: '#f8f8f8',
-    whithe: '#ffffff',
+    white: '#ffffff',
     black: '#000000',
-    red: '#ff0000'
+    red: '#ff0000',
+    lightGreen: '#6CCD91',
+    green: '#00843F'
   }
 };
 

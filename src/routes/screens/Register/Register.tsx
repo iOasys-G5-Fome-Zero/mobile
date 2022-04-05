@@ -6,6 +6,8 @@ import { FormHandles, SubmitHandler } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { api } from '../../../services/api';
+import { useAppDispatch } from '../../../store/store';
+import { setUser } from '../../../store';
 // import { prettyLog } from '../../../helpers';
 
 // components
@@ -28,17 +30,18 @@ const Register: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [checked, setChecked] = useState(false);
   const navigation = useNavigation<NavProps>();
+  const dispatch = useAppDispatch();
 
   const handleCheckBox = () => {
     setChecked(status => !status);
   };
 
   const handleNavigation = (userType: string) => {
-    if (userType === 'buyer') {
+    if (userType === 'consumer') {
       navigation.navigate('ConsumerTabNavigator');
     }
 
-    if (userType === 'seller') {
+    if (userType === 'producer') {
       navigation.navigate('ProducerTabNavigator');
     }
   };
@@ -93,6 +96,17 @@ const Register: React.FC = () => {
         password: formData.password
       });
 
+      dispatch(
+        setUser({
+          id: data.id,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          userType: data.userType
+        })
+      );
+
       handleNavigation(data.userType);
     } catch (error) {
       handleError(error);
@@ -101,7 +115,7 @@ const Register: React.FC = () => {
 
   return (
     <StyledContainer>
-      <StyledText bold size={24}>
+      <StyledText style={{ marginTop: 60 }} bold size={24}>
         Criar conta
       </StyledText>
       <StyledText style={{ marginBottom: 20, marginTop: 10 }} size={14}>

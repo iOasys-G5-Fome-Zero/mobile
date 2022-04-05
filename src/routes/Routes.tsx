@@ -1,14 +1,17 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'react-native';
+import { useAppSelector } from '../store/store';
 
 // screens
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 
-import ProducerTabNavigator from './Tabs/ProducerTabNavigator';
-import ConsumerTabNavigator from './Tabs/ConsumerTabNavigator';
+import ProducerTabNavigator from './tabs/ProducerTabNavigator';
+import ConsumerTabNavigator from './tabs/ConsumerTabNavigator';
+
+import { WebView } from '../components';
 
 // types
 export type MainStackParams = {
@@ -21,6 +24,20 @@ export type MainStackParams = {
 const Main = createNativeStackNavigator<MainStackParams>();
 
 const Routes: React.FC = () => {
+  const goWeb = useAppSelector(state => state.webReducer.go);
+
+  useEffect(() => {
+    if (goWeb) {
+      StatusBar.setBarStyle('light-content');
+      StatusBar.setBackgroundColor('#262626');
+    } else {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#6CCD91');
+    }
+  });
+
+  if (goWeb) return <WebView />;
+
   return (
     <NavigationContainer>
       <Main.Navigator
@@ -31,9 +48,9 @@ const Routes: React.FC = () => {
         }}
       >
         <Main.Screen name='Login' component={Login} />
+        <Main.Screen name='Register' component={Register} />
         <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
         <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
-        <Main.Screen name='Register' component={Register} />
       </Main.Navigator>
     </NavigationContainer>
   );
