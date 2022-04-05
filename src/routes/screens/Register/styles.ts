@@ -9,10 +9,10 @@ interface ITextProps {
 
 const { width } = Dimensions.get('window');
 
-export const StyledContainer = styled.View`
+export const StyledContainer = styled.ScrollView`
   flex: 1;
-  justify-content: center;
-  margin: 0 7.5%;
+  width: 85%;
+  align-self: center;
 `;
 
 export const StyledText = styled.Text<ITextProps>`
@@ -23,6 +23,7 @@ export const StyledText = styled.Text<ITextProps>`
 export const StyledSaveLogin = styled.View`
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
 `;
 
 export const StyledSaveLoginText = styled.Text`

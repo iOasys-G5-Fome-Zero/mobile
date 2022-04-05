@@ -108,7 +108,7 @@ const Register: React.FC = () => {
 
   return (
     <StyledContainer>
-      <StyledText bold size={24}>
+      <StyledText style={{ marginTop: 60 }} bold size={24}>
         Criar conta
       </StyledText>
       <StyledText style={{ marginBottom: 20, marginTop: 10 }} size={14}>

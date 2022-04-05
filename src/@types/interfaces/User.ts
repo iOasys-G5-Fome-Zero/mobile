@@ -9,9 +9,9 @@ export interface IUser {
 
 export interface IUserResponse {
   id: string;
-  firstName: string;
-  lastName: string;
-  userType: string;
+  first_name: string;
+  last_name: string;
+  user_type: string;
   email: string;
   phone: string;
   cpf: string;

@@ -5,11 +5,15 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FormHandles, SubmitHandler } from '@unform/core/typings/types';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
+import { useAppDispatch } from '../../../store/store';
+import { setUser } from '../../../store';
 import { MainStackParams } from '../../Routes';
-import { prettyLog } from '../../../helpers';
 import { api } from '../../../services/api';
 
-// components
+// componets
+import { Input, Button } from '../../../components';
+
+// styled componets
 import {
   StyledContainer,
   StyledTitle,
@@ -22,9 +26,10 @@ import {
   StyledButtonContainer,
   StyledErrorMessage
 } from './styles';
-import { Input, Button } from '../../../components';
 
 // types
+import { IUserResponse } from '../../../@types/interfaces/User';
+
 type NavProps = NativeStackNavigationProp<
   MainStackParams,
   'ConsumerTabNavigator' | 'ProducerTabNavigator'
@@ -40,10 +45,9 @@ const Login: React.FC = () => {
   const [error, setError] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation<NavProps>();
+  const dispatch = useAppDispatch();
 
   const handleLogin: SubmitHandler<IForm> = async data => {
-    // prettyLog(data);
-
     try {
       const { data: dataUser } = await api.post('/auth/login', {
         phoneOrEmail: data.email,
@@ -52,7 +56,7 @@ const Login: React.FC = () => {
 
       setToken(dataUser);
       handleNavigation(dataUser.user_type);
-
+      handleSaveUser(dataUser);
       setError(false);
     } catch (err) {
       setError(true);
@@ -67,6 +71,19 @@ const Login: React.FC = () => {
     if (userType === 'producer') {
       navigation.navigate('ProducerTabNavigator');
     }
+  };
+
+  const handleSaveUser = (user: IUserResponse) => {
+    dispatch(
+      setUser({
+        id: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email,
+        phone: user.phone,
+        userType: user.user_type
+      })
+    );
   };
 
   const handleCheckBox = () => {
@@ -95,6 +112,7 @@ const Login: React.FC = () => {
         refresh_token: credentials.password
       });
 
+      handleSaveUser(dataUser);
       handleNavigation(dataUser.user_type);
     }
   };
@@ -109,8 +127,8 @@ const Login: React.FC = () => {
       <StyledTitle>Logo</StyledTitle>
       <Form
         initialData={{
-          email: '',
-          password: ''
+          email: 'consumer@consumer.com',
+          password: 'Casas456$'
         }}
         ref={formRef}
         onSubmit={handleLogin}

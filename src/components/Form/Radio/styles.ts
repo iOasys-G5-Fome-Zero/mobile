@@ -22,9 +22,9 @@ export const CheckButton = styled.TouchableOpacity`
 `;
 
 export const Check = styled.TouchableOpacity`
-  width: ${width * 0.04}px;
-  height: ${width * 0.04}px;
-  border: 2px solid #c4c4c4;
+  width: ${width * 0.035}px;
+  height: ${width * 0.035}px;
+  border: 2px solid ${({ theme }) => theme.colors.black};
   border-radius: ${(width * 0.04) / 2}px;
   z-index: -1;
 `;

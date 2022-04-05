@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StatusBar } from 'react-native';
 import { Dimensions } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -17,7 +18,7 @@ export const StyledContainer = styled.View`
 `;
 export const StyledImage = styled.Image`
   width: ${width}px;
-  height: ${height}px;
+  height: ${height + StatusBar.currentHeight}px;
   position: absolute;
   z-index: -1;
 `;
@@ -29,12 +30,12 @@ export const StyledText = styled.Text<ITextProps>`
 `;
 
 export const StyledButtonText = styled.Text`
-  color: ${({ theme }) => theme.colors.whithe};
+  color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(14)}px;
 `;
 
 export const StyledButtonNext = styled.View`
-  background-color: ${({ theme }) => theme.colors.green};
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 16px;
   height: 38px;
   width: 90px;
@@ -43,7 +44,7 @@ export const StyledButtonNext = styled.View`
 `;
 
 export const StyledButton = styled.TouchableOpacity`
-  background-color: ${({ theme }) => theme.colors.green};
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 16px;
   height: 38px;
   width: 90px;

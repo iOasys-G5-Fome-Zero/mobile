@@ -3,9 +3,10 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 // reducers
 import userReducer from './slices/user';
+import webReducer from './slices/web';
 
 export const store = configureStore({
-  reducer: { userReducer }
+  reducer: { userReducer, webReducer }
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -49,7 +49,7 @@ const Radio: React.FC<IProps> = ({ options, name, size = 18 }) => {
     checkRefs.current[index].value = item;
     checkRefs.current[index].setNativeProps({
       style: {
-        backgroundColor: '#000000'
+        backgroundColor: '#283036'
       }
     });
   };

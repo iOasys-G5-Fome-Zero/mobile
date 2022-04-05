@@ -11,7 +11,7 @@ import { StyledContainer, StyledTitle } from './styles';
 // types
 type NavProps = NativeStackNavigationProp<MainStackParams, 'Login'>;
 
-const AboutConsumer: React.FC = () => {
+const ProfileConsumer: React.FC = () => {
   const navigation = useNavigation<NavProps>();
 
   const handleGoOut = async () => {
@@ -23,7 +23,7 @@ const AboutConsumer: React.FC = () => {
 
   return (
     <StyledContainer>
-      <StyledTitle>About Consumer</StyledTitle>
+      <StyledTitle>Profile Consumer</StyledTitle>
       <Button style={{ marginBottom: 60, marginTop: 20 }} size={14} onPress={() => handleGoOut()}>
         SAIR
       </Button>
@@ -31,4 +31,4 @@ const AboutConsumer: React.FC = () => {
   );
 };
 
-export default AboutConsumer;
+export default ProfileConsumer;
