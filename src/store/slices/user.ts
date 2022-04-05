@@ -8,9 +8,8 @@ const UserSlice = createSlice({
       firstName: '',
       lastName: '',
       email: '',
-      phone: '',
-      user_types: '',
-      avatar: ''
+      avatar: '',
+      userType: ''
     }
   },
   reducers: {

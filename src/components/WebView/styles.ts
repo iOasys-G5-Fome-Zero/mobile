@@ -12,7 +12,7 @@ export const StyledRouteView = styled.View`
   align-items: center;
   margin-top: ${StatusBar.currentHeight}px;
   width: 100%;
-  height: 55px;
+  height: 60px;
   background-color: #262626;
 `;
 
@@ -20,7 +20,7 @@ export const StyledContainerRoute = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.black};
   width: 70%;
   height: 80%;
   border-radius: 10px;
@@ -35,7 +35,8 @@ export const StyledContentRoute = styled.View`
 
 export const StyledText = styled.Text<IPropsText>`
   font-family: ${({ theme }) => theme.fonts.HEADLINE};
-  font-size: ${RFValue(14)}px;
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
   text-align: center;
+  font-size: ${RFValue(14)}px;
+  color: ${({ theme }) => theme.colors.white};
 `;

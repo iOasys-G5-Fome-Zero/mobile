@@ -10,7 +10,10 @@ import { setUser } from '../../../store';
 import { MainStackParams } from '../../Routes';
 import { api } from '../../../services/api';
 
-// components
+// componets
+import { Input, Button } from '../../../components';
+
+// styled componets
 import {
   StyledContainer,
   StyledTitle,
@@ -23,7 +26,6 @@ import {
   StyledButtonContainer,
   StyledErrorMessage
 } from './styles';
-import { Input, Button } from '../../../components';
 
 // types
 import { IUserResponse } from '../../../@types/interfaces/User';

@@ -32,7 +32,13 @@ const WebView: React.FC = () => {
         />
 
         <StyledContainerRoute>
-          <Icon type='feather' name='lock' size={18} tvParallaxProperties={undefined} />
+          <Icon
+            type='feather'
+            name='lock'
+            size={18}
+            color='#fff'
+            tvParallaxProperties={undefined}
+          />
           <StyledContentRoute>
             <StyledText bold>{title.length > 20 ? `${title.substring(0, 20)}` : title}</StyledText>
             <StyledText>{url.length > 35 ? `${url.substring(0, 33)}` : url}</StyledText>

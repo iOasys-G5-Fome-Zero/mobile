@@ -11,7 +11,7 @@ export const StyledContainer = styled.SafeAreaView`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.lightGreen};
+  background-color: ${({ theme }) => theme.colors.secundary};
   margin-top: ${StatusBar.currentHeight}px;
   padding: 0 20px;
 `;

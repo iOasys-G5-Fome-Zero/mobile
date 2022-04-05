@@ -13,7 +13,7 @@ import { setUser } from '../../../store';
 // components
 import { Radio, Button, Input } from '../../../components';
 import { StyledContainer, StyledText, StyledSaveLogin, StyledSaveLoginText } from './styles';
-import { handleError } from '../../../helpers';
+import { handleError, handleMessage } from '../../../helpers';
 import { MainStackParams } from '../../Routes';
 
 // types
@@ -21,10 +21,7 @@ interface IForm {
   userType: string;
 }
 
-type NavProps = NativeStackNavigationProp<
-  MainStackParams,
-  'ConsumerTabNavigator' | 'ProducerTabNavigator'
->;
+type NavProps = NativeStackNavigationProp<MainStackParams, 'Onboarding'>;
 
 const Register: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -36,14 +33,8 @@ const Register: React.FC = () => {
     setChecked(status => !status);
   };
 
-  const handleNavigation = (userType: string) => {
-    if (userType === 'consumer') {
-      navigation.navigate('ConsumerTabNavigator');
-    }
-
-    if (userType === 'producer') {
-      navigation.navigate('ProducerTabNavigator');
-    }
+  const handleNavigation = () => {
+    navigation.navigate('Onboarding');
   };
 
   const handleLogin: SubmitHandler<IForm> = async data => {
@@ -62,7 +53,11 @@ const Register: React.FC = () => {
 
       formRef.current.setErrors({});
 
-      await setRegister(data);
+      if (!checked) {
+        handleMessage('Você deve marcar a caixa de Aceito os Termos para continuar');
+      } else {
+        await setRegister(data);
+      }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessages = {};
@@ -91,7 +86,7 @@ const Register: React.FC = () => {
       const { data } = await api.post('/users/new-user/', {
         firstName,
         lastName,
-        userType: formData.userType === 'Sou consumidor' ? 'buyer' : 'seller',
+        userType: formData.userType === 'Sou consumidor' ? 'consumer' : 'producer',
         email: formData.email,
         password: formData.password
       });
@@ -102,12 +97,10 @@ const Register: React.FC = () => {
           firstName: data.firstName,
           lastName: data.lastName,
           email: data.email,
-          phone: data.phone,
           userType: data.userType
         })
       );
-
-      handleNavigation(data.userType);
+      handleNavigation();
     } catch (error) {
       handleError(error);
     }

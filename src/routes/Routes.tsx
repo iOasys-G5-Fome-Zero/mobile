@@ -7,6 +7,7 @@ import { useAppSelector } from '../store/store';
 // screens
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
+import Onboarding from './screens/Onboarding/Onboarding';
 
 import ProducerTabNavigator from './tabs/ProducerTabNavigator';
 import ConsumerTabNavigator from './tabs/ConsumerTabNavigator';
@@ -19,6 +20,7 @@ export type MainStackParams = {
   Register: undefined;
   ProducerTabNavigator: undefined;
   ConsumerTabNavigator: undefined;
+  Onboarding: undefined;
 };
 
 const Main = createNativeStackNavigator<MainStackParams>();
@@ -44,13 +46,14 @@ const Routes: React.FC = () => {
         initialRouteName='Login'
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: '#fff' }
+          contentStyle: { backgroundColor: '#FFFFFF' }
         }}
       >
         <Main.Screen name='Login' component={Login} />
         <Main.Screen name='Register' component={Register} />
         <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
         <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
+        <Main.Screen name='Onboarding' component={Onboarding} />
       </Main.Navigator>
     </NavigationContainer>
   );

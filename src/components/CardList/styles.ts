@@ -31,7 +31,7 @@ export const StyledCardContainer = styled.TouchableOpacity<IImageProps>`
 export const StyledCardImage = styled.Image`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.green};
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 5px;
 `;
 
