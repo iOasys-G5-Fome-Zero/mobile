@@ -6,12 +6,14 @@ import { FormHandles, SubmitHandler } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { api } from '../../../services/api';
+import { useAppDispatch } from '../../../store/store';
+import { setUser } from '../../../store';
 // import { prettyLog } from '../../../helpers';
 
 // components
 import { Radio, Button, Input } from '../../../components';
 import { StyledContainer, StyledText, StyledSaveLogin, StyledSaveLoginText } from './styles';
-import { handleError } from '../../../helpers';
+import { handleError, handleMessage } from '../../../helpers';
 import { MainStackParams } from '../../Routes';
 
 // types
@@ -19,28 +21,20 @@ interface IForm {
   userType: string;
 }
 
-type NavProps = NativeStackNavigationProp<
-  MainStackParams,
-  'ConsumerTabNavigator' | 'ProducerTabNavigator'
->;
+type NavProps = NativeStackNavigationProp<MainStackParams, 'Onboarding'>;
 
 const Register: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [checked, setChecked] = useState(false);
   const navigation = useNavigation<NavProps>();
+  const dispatch = useAppDispatch();
 
   const handleCheckBox = () => {
     setChecked(status => !status);
   };
 
-  const handleNavigation = (userType: string) => {
-    if (userType === 'buyer') {
-      navigation.navigate('ConsumerTabNavigator');
-    }
-
-    if (userType === 'seller') {
-      navigation.navigate('ProducerTabNavigator');
-    }
+  const handleNavigation = () => {
+    navigation.navigate('Onboarding');
   };
 
   const handleLogin: SubmitHandler<IForm> = async data => {
@@ -59,7 +53,11 @@ const Register: React.FC = () => {
 
       formRef.current.setErrors({});
 
-      await setRegister(data);
+      if (!checked) {
+        handleMessage('Você deve marcar a caixa de Aceito os Termos para continuar');
+      } else {
+        await setRegister(data);
+      }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessages = {};
@@ -88,12 +86,21 @@ const Register: React.FC = () => {
       const { data } = await api.post('/users/new-user/', {
         firstName,
         lastName,
-        userType: formData.userType === 'Sou consumidor' ? 'buyer' : 'seller',
+        userType: formData.userType === 'Sou consumidor' ? 'consumer' : 'producer',
         email: formData.email,
         password: formData.password
       });
 
-      handleNavigation(data.userType);
+      dispatch(
+        setUser({
+          id: data.id,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          userType: data.userType
+        })
+      );
+      handleNavigation();
     } catch (error) {
       handleError(error);
     }
