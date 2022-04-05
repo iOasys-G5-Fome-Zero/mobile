@@ -1,1 +1,1 @@
-export { useAppDispatch, useAppSelector } from "./store";
+export { setUser } from './slices/user';

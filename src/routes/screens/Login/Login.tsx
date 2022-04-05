@@ -42,7 +42,7 @@ const Login: React.FC = () => {
   const navigation = useNavigation<NavProps>();
 
   const handleLogin: SubmitHandler<IForm> = async data => {
-    prettyLog(data);
+    // prettyLog(data);
 
     try {
       const { data: dataUser } = await api.post('/auth/login', {
@@ -60,11 +60,11 @@ const Login: React.FC = () => {
   };
 
   const handleNavigation = (userType: string) => {
-    if (userType === 'buyer') {
+    if (userType === 'consumer') {
       navigation.navigate('ConsumerTabNavigator');
     }
 
-    if (userType === 'seller') {
+    if (userType === 'producer') {
       navigation.navigate('ProducerTabNavigator');
     }
   };
