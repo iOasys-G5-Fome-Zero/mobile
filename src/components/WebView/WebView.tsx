@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { WebView as WebContainer } from 'react-native-webview';
@@ -12,6 +13,8 @@ const WebView: React.FC = () => {
   const [title, setTTitle] = useState('');
   const [url, setUrl] = useState('');
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
+
   const initialUrl = useAppSelector(state => state.webReducer.url);
 
   useEffect(() => {
@@ -28,7 +31,10 @@ const WebView: React.FC = () => {
           size={24}
           color='#fff'
           tvParallaxProperties={undefined}
-          onPress={() => dispatch(setWeb({ go: false }))}
+          onPress={() => {
+            dispatch(setWeb({ go: false }));
+            navigation.goBack();
+          }}
         />
 
         <StyledContainerRoute>

@@ -8,8 +8,13 @@ interface PropsLabel {
   size: number;
 }
 
-export const Container = styled.View`
+export const StyledContainer = styled.View`
   width: 100%;
+`;
+
+export const StyledContainerCheck = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const ErrorMessage = styled.Text`
@@ -21,16 +26,25 @@ export const CheckButton = styled.TouchableOpacity`
   margin-bottom: 10px;
 `;
 
-export const Check = styled.TouchableOpacity`
-  width: ${width * 0.035}px;
-  height: ${width * 0.035}px;
-  border: 2px solid ${({ theme }) => theme.colors.black};
-  border-radius: ${(width * 0.04) / 2}px;
-  z-index: -1;
+export const StyledBorderCheckBox = styled.TouchableOpacity`
+  width: ${width * 0.05}px;
+  height: ${width * 0.05}px;
+  border: 2px solid ${({ theme }) => theme.colors.primary};
+  border-radius: ${(width * 0.05) / 2}px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+`;
+
+export const StyledCheckBox = styled.View`
+  width: 80%;
+  height: 80%;
+  border-radius: 50px;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Label = styled.Text<PropsLabel>`
+  font-family: ${({ theme }) => theme.fonts.HEADLINE};
   font-size: ${({ size }) => RFValue(size)}px;
-  justify-content: center;
-  align-items: center;
+  margin-top: 5px;
 `;

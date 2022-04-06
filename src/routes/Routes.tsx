@@ -21,6 +21,7 @@ export type MainStackParams = {
   ProducerTabNavigator: undefined;
   ConsumerTabNavigator: undefined;
   Onboarding: undefined;
+  WebView: undefined;
 };
 
 const Main = createNativeStackNavigator<MainStackParams>();
@@ -38,7 +39,7 @@ const Routes: React.FC = () => {
     }
   });
 
-  if (goWeb) return <WebView />;
+  // if (goWeb) return <WebView />;
 
   return (
     <NavigationContainer>
@@ -54,6 +55,7 @@ const Routes: React.FC = () => {
         <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
         <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
         <Main.Screen name='Onboarding' component={Onboarding} />
+        <Main.Screen name='WebView' component={WebView} />
       </Main.Navigator>
     </NavigationContainer>
   );
