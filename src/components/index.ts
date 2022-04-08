@@ -5,3 +5,5 @@ export { default as Header } from './Header/Header';
 export { default as CardList } from './CardList/CardList';
 export { default as WebView } from './WebView/WebView';
 export { default as Label } from './Form/Label/Label';
+export { default as Counter } from './Form/Counter/Counter';
+export { default as Modal } from './Modal/Modal';

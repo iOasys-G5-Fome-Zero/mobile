@@ -8,8 +8,11 @@ const themeDefault = {
     white: '#FFFFFF',
     black: '#262626',
     error: '#FF0000',
+    warning: '#FFD53D',
     primary: '#00843F',
-    secundary: '#6CCD91'
+    secundary: '#6CCD91',
+    lightGreen: '#C1E9CF',
+    circle: '#FF9769'
   }
 };
 

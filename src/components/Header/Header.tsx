@@ -13,9 +13,10 @@ import { StyledContainer, StyledText, StyledRow } from './styled';
 interface IHeaderProps {
   title: string;
   welcome?: boolean;
+  size?: number;
 }
 
-const Header: React.FC<IHeaderProps> = ({ title, welcome = false }) => {
+const Header: React.FC<IHeaderProps> = ({ title, welcome = false, size = 21 }) => {
   const navigation = useNavigation();
 
   return (
@@ -31,7 +32,9 @@ const Header: React.FC<IHeaderProps> = ({ title, welcome = false }) => {
             tvParallaxProperties={undefined}
           />
         )}
-        <StyledText iconLeft={welcome}>{welcome ? `Olá ${title}!` : title}</StyledText>
+        <StyledText size={size} iconLeft={welcome}>
+          {welcome ? `Olá ${title}!` : title}
+        </StyledText>
       </StyledRow>
       <MessageIcon />
     </StyledContainer>

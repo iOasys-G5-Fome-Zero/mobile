@@ -1,7 +1,10 @@
 import React, { useRef } from 'react';
+import * as Yup from 'yup';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
-import { prettyLog } from '../../../../helpers';
+import { TabActions, useNavigation } from '@react-navigation/native';
+import { handleError, getDefaulSize, getDefaultFrequency } from '../../../../helpers';
+import { api } from '../../../../services/api';
 
 // componets
 import { Header, Radio, Label, Button } from '../../../../components';
@@ -9,11 +12,63 @@ import { Header, Radio, Label, Button } from '../../../../components';
 // styled components
 import { StyledContainer, StyledTitle, StyledContainerForm } from './styles';
 
-const MyBasketConsumer: React.FC = () => {
+// interfaces
+import { IProducerBaskets } from '../../../../@types/interfaces/ProducerBaskets';
+
+const MyBasketConsumerSignPlan: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const navigation = useNavigation();
+
+  const handleNavigate = (myBasket: IProducerBaskets) => {
+    const jumpToSignFood = TabActions.jumpTo('MyBasketConsumerSignFood', { myBasket });
+
+    navigation.dispatch(jumpToSignFood);
+  };
 
   const handleForm = async (data: any) => {
-    prettyLog(data);
+    try {
+      const schema = Yup.object().shape({
+        frequency: Yup.string().required('Frequencia é obrigatório'),
+        size: Yup.string().required('Tamnho da cesta é obrigatório')
+      });
+
+      await schema.validate(data, { abortEarly: false });
+
+      formRef.current.setErrors({});
+
+      const myBasket = await getBasket(data.frequency, data.size);
+
+      handleNavigate(myBasket);
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {};
+
+        error.inner.forEach(err => {
+          errorMessages[err.path] = err.message;
+        });
+
+        formRef.current.setErrors(errorMessages);
+      }
+    }
+  };
+
+  const getBasket = async (frequency: string, size: string) => {
+    try {
+      const { data } = await api.get('/baskets/producers-baskets', {
+        params: {
+          daysPerDeliver: getDefaultFrequency(frequency),
+          size: getDefaulSize(size)
+        }
+      });
+
+      const randonNumber = Math.floor(Math.random() * data.length);
+
+      const basket = data[randonNumber];
+
+      return basket;
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   return (
@@ -24,7 +79,7 @@ const MyBasketConsumer: React.FC = () => {
           <StyledTitle>Vamos configurar seu plano</StyledTitle>
           <Label title='Escolha qual a frequência de recebimento ou retirada da sua cesta:' />
           <Radio
-            name='day_per_deliver'
+            name='frequency'
             size={14}
             options={['Semanal', 'Quinzenal']}
             containerStyle={{
@@ -70,4 +125,4 @@ const MyBasketConsumer: React.FC = () => {
   );
 };
 
-export default MyBasketConsumer;
+export default MyBasketConsumerSignPlan;

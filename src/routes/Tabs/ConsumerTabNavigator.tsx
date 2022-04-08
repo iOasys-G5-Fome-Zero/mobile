@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 // icons
 import HomeIcon from '../../assets/icons/home-icon.svg';
@@ -10,19 +11,28 @@ import ProfileIcon from '../../assets/icons/profile-icon.svg';
 // screens
 import {
   HomeConsumer,
-  MyBasketConsumer,
+  MyBasketConsumerSignPlan,
   DonationsConsumer,
-  ProfileConsumer
+  ProfileConsumer,
+  MyBasketConsumerSignFood,
+  MyBasketConsumerSignPayment
 } from '../screens/Consumer';
 
-export type TabConsumerStackParams = {
+export type BottomTabConsumerStackParams = {
   HomeConsumer: undefined;
   MyBasketConsumer: undefined;
   DonationsConsumer: undefined;
   ProfileConsumer: undefined;
 };
 
-const Tab = createMaterialBottomTabNavigator();
+export type TopTabMyBasketConsumerStackParams = {
+  MyBasketConsumerSignPlan: undefined;
+  MyBasketConsumerSignFood: undefined;
+  MyBasketConsumerSignPayment: undefined;
+};
+
+const BottomTab = createMaterialBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 const retunrIconTab = ({ icon, focused }) => {
   switch (icon) {
@@ -38,15 +48,31 @@ const retunrIconTab = ({ icon, focused }) => {
   }
 };
 
+const ReturnTopTabMyBasketConsumer = () => {
+  return (
+    <TopTab.Navigator
+      initialRouteName='MyBasketConsumerSignPlan'
+      screenOptions={{
+        swipeEnabled: false,
+        tabBarStyle: { display: 'none' }
+      }}
+    >
+      <TopTab.Screen name='MyBasketConsumerSignPlan' component={MyBasketConsumerSignPlan} />
+      <TopTab.Screen name='MyBasketConsumerSignFood' component={MyBasketConsumerSignFood} />
+      <TopTab.Screen name='MyBasketConsumerSignPayment' component={MyBasketConsumerSignPayment} />
+    </TopTab.Navigator>
+  );
+};
+
 const ConsumerTabNavigator: React.FC = () => {
   return (
-    <Tab.Navigator
+    <BottomTab.Navigator
       activeColor='#00A857'
       inactiveColor='#3A3A3A'
       barStyle={{ backgroundColor: '#F2F2F8' }}
       shifting={false}
     >
-      <Tab.Screen
+      <BottomTab.Screen
         name='HomeConsumer'
         options={{
           tabBarLabel: 'Início',
@@ -54,15 +80,15 @@ const ConsumerTabNavigator: React.FC = () => {
         }}
         component={HomeConsumer}
       />
-      <Tab.Screen
+      <BottomTab.Screen
         name='MyBasketConsumer'
         options={{
           tabBarLabel: 'Minha cesta',
           tabBarIcon: ({ focused }) => retunrIconTab({ icon: 'basket', focused })
         }}
-        component={MyBasketConsumer}
+        component={ReturnTopTabMyBasketConsumer}
       />
-      <Tab.Screen
+      <BottomTab.Screen
         name='DonationsConsumer'
         options={{
           tabBarLabel: 'Doações',
@@ -70,7 +96,7 @@ const ConsumerTabNavigator: React.FC = () => {
         }}
         component={DonationsConsumer}
       />
-      <Tab.Screen
+      <BottomTab.Screen
         name='ProfileConsumer'
         options={{
           tabBarLabel: 'Perfil',
@@ -78,7 +104,7 @@ const ConsumerTabNavigator: React.FC = () => {
         }}
         component={ProfileConsumer}
       />
-    </Tab.Navigator>
+    </BottomTab.Navigator>
   );
 };
 
