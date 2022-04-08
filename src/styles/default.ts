@@ -9,7 +9,8 @@ const themeDefault = {
     black: '#262626',
     error: '#FF0000',
     primary: '#00843F',
-    secundary: '#6CCD91'
+    secundary: '#6CCD91',
+    third: '#C1E9CF'
   }
 };
 

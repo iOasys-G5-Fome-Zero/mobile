@@ -8,9 +8,10 @@ import { useAppSelector } from '../store/store';
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Onboarding from './screens/Onboarding/Onboarding';
+import BasketProducer from './screens/Producer/BasketProducer/BasketProducer';
 
-import ProducerTabNavigator from './tabs/ProducerTabNavigator';
-import ConsumerTabNavigator from './tabs/ConsumerTabNavigator';
+import ProducerTabNavigator from './Tabs/ProducerTabNavigator';
+import ConsumerTabNavigator from './Tabs/ProducerTabNavigator';
 
 import { WebView } from '../components';
 
@@ -21,6 +22,7 @@ export type MainStackParams = {
   ProducerTabNavigator: undefined;
   ConsumerTabNavigator: undefined;
   Onboarding: undefined;
+  BasketProducer: undefined;
 };
 
 const Main = createNativeStackNavigator<MainStackParams>();
@@ -54,6 +56,7 @@ const Routes: React.FC = () => {
         <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
         <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
         <Main.Screen name='Onboarding' component={Onboarding} />
+        <Main.Screen name='BasketProducer' component={BasketProducer} />
       </Main.Navigator>
     </NavigationContainer>
   );

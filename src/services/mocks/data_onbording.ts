@@ -1,6 +1,6 @@
-import image_onbording_1 from '../../assets/images/onboarding/onboarding_1.jpg';
-import image_onbording_2 from '../../assets/images/onboarding/onboarding_2.jpg';
-import image_onbording_3 from '../../assets/images/onboarding/onboarding_3.jpg';
+import image_onbording_1 from '../../assets/images/Onboarding/Onboarding_1.jpg';
+import image_onbording_2 from '../../assets/images/Onboarding/Onboarding_2.jpg';
+import image_onbording_3 from '../../assets/images/Onboarding/Onboarding_3.jpg';
 
 const data_onbording = [
   {
