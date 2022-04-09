@@ -42,6 +42,8 @@ export const StyledButton = styled.TouchableOpacity``;
 export const StyledRow = styled(Row)<IPropsRow>`
   justify-content: ${({ between }) => (between ? 'space-between' : 'flex-start')};
 `;
+
+export const StyledLoading = styled.ActivityIndicator``;
 export const StyledContainerForm = styled(Scroll)``;
 export const StyledText = styled(Text)``;
 export const StyledContainerCloseModal = styled(ContainerCloseModal)``;

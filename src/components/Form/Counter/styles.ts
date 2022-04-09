@@ -21,7 +21,7 @@ export const StyledContinerInfo = styled.View`
   padding: 0px 8px;
 `;
 
-export const StyledImage = styled.View`
+export const StyledImage = styled.Image`
   height: 100%;
   width: 30%;
   background-color: ${({ theme }) => theme.colors.primary};

@@ -3,6 +3,7 @@ import { Form } from '@unform/mobile';
 import { Icon } from 'react-native-elements';
 import { RouteProp, TabActions, useNavigation } from '@react-navigation/native';
 import { FormHandles, SubmitHandler } from '@unform/core';
+import { translateBasket, getTotalItemsBasket } from '../../../../helpers';
 
 // icons
 import VegetableIcon from '../../../../assets/icons/vegetable.svg';
@@ -21,8 +22,8 @@ import {
 } from './styles';
 
 // interfaces
-import { IProducerBaskets } from '../../../../@types/interfaces/ProducerBaskets';
-import { IBasketItems, IFoodInMyBasket } from '../../../../@types/interfaces/Food';
+import { IProducerBaskets } from '../../../../@types/interfaces/Basket';
+import { IBasketItems, IMyRemovedFood } from '../../../../@types/interfaces/Food';
 import { useGetFoodsBasket } from '../../../../hooks';
 
 interface IProps {
@@ -30,29 +31,25 @@ interface IProps {
 }
 
 const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
-  const formRef = useRef<FormHandles>(null);
-  const foods = useGetFoodsBasket(route.params?.myBasket.basket_id);
   const [modalVisible, setModalVisible] = useState(false);
   const [quantityFoodsDonation, setQuantityFoodsDonation] = useState(0);
-  const [myFoodsBasket, setMyFoodsBasket] = useState([]);
-
+  const [myRemovedFoodsBasket, setMyRemovedFoodsBasket] = useState([]);
+  const formRef = useRef<FormHandles>(null);
+  const foods = useGetFoodsBasket(route.params?.myBasket.basket_id);
   const navigation = useNavigation();
 
-  const handleNavigate = ({ myBasket }) => {
-    const jumpToSignFood = TabActions.jumpTo('MyBasketConsumerSignPayment', {
-      myBasket,
-      myFoodsBasket
-    });
+  const handleFood: SubmitHandler<IBasketItems> = async data => {
+    getFoodRemovedBasket(data);
+  };
+
+  const handleNavigate = (goTo: string, params = {}) => {
+    const jumpToSignFood = TabActions.jumpTo(goTo, params);
 
     navigation.dispatch(jumpToSignFood);
   };
 
-  const handleDonateFood: SubmitHandler<IBasketItems> = async data => {
-    getFoodRemovedBasket(data);
-  };
-
   const getFoodRemovedBasket = (data: IBasketItems) => {
-    const foodMyBasket: IFoodInMyBasket[] = [];
+    const foodMyBasket: IMyRemovedFood[] = [];
     let countFoodDonation = 0;
 
     Object.entries(data).forEach(food => {
@@ -66,7 +63,7 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
       countFoodDonation += food.quantity;
     });
 
-    setMyFoodsBasket(foodMyBasket);
+    setMyRemovedFoodsBasket(foodMyBasket);
     setQuantityFoodsDonation(countFoodDonation);
   };
 
@@ -116,7 +113,10 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
             size={14}
             onPress={() => {
               setModalVisible(false);
-              handleNavigate({ myBasket: route.params?.myBasket });
+              handleNavigate('MyBasketConsumerSignPayment', {
+                myBasket: route.params?.myBasket,
+                myRemovedFoodsBasket
+              });
             }}
           >
             Confirmar
@@ -126,12 +126,20 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
     );
   };
 
+  if (!foods) {
+    return <StyledLoading size='small' color='#00843F' />;
+  }
+
   return (
     <StyledContainer>
-      <Header title='Assinatura' />
+      <Header title='Assinatura' nav={() => handleNavigate('MyBasketConsumerSignPlan')} />
       <StyledContainerForm showsVerticalScrollIndicator={false}>
         <StyledText size={14}>
-          {`Você escolheu a cesta de tamanho ${route.params?.myBasket.basket_size} (11 itens), selecione quantas porções de cada categoria deseja receber.`}
+          {`Você escolheu a cesta de tamanho ${translateBasket(
+            route.params?.myBasket.basket_size
+          )} (${getTotalItemsBasket(
+            route.params?.myBasket.basket_size
+          )} itens), selecione quantas porções de cada categoria deseja receber.`}
         </StyledText>
         <StyledContainerWarning>
           <StyledText align bold size={16}>
@@ -145,7 +153,7 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
           </StyledText>
         </StyledContainerWarning>
 
-        <Form ref={formRef} onSubmit={handleDonateFood}>
+        <Form ref={formRef} onSubmit={handleFood}>
           {foods ? (
             foods.map(food => <Counter data={food} />)
           ) : (

@@ -38,7 +38,7 @@ const Counter: React.FC<IProps> = ({ data }) => {
 
   return (
     <StyledContainer key={data.id}>
-      <StyledImage />
+      <StyledImage source={{ uri: data.foodID.imageUrl }} resizeMode='cover' />
       <StyledContinerInfo>
         <StyledColumn>
           <StyledText>{translateFood(data.foodID.name)}</StyledText>

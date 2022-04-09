@@ -13,19 +13,13 @@ import { Header, Radio, Label, Button } from '../../../../components';
 import { StyledContainer, StyledTitle, StyledContainerForm } from './styles';
 
 // interfaces
-import { IProducerBaskets } from '../../../../@types/interfaces/ProducerBaskets';
+import { IProducerBaskets } from '../../../../@types/interfaces/Basket';
 
 const MyBasketConsumerSignPlan: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
 
-  const handleNavigate = (myBasket: IProducerBaskets) => {
-    const jumpToSignFood = TabActions.jumpTo('MyBasketConsumerSignFood', { myBasket });
-
-    navigation.dispatch(jumpToSignFood);
-  };
-
-  const handleForm = async (data: any) => {
+  const handlePlan = async (data: any) => {
     try {
       const schema = Yup.object().shape({
         frequency: Yup.string().required('Frequencia é obrigatório'),
@@ -33,7 +27,6 @@ const MyBasketConsumerSignPlan: React.FC = () => {
       });
 
       await schema.validate(data, { abortEarly: false });
-
       formRef.current.setErrors({});
 
       const myBasket = await getBasket(data.frequency, data.size);
@@ -50,6 +43,12 @@ const MyBasketConsumerSignPlan: React.FC = () => {
         formRef.current.setErrors(errorMessages);
       }
     }
+  };
+
+  const handleNavigate = (myBasket: IProducerBaskets) => {
+    const jumpToSignFood = TabActions.jumpTo('MyBasketConsumerSignFood', { myBasket });
+
+    navigation.dispatch(jumpToSignFood);
   };
 
   const getBasket = async (frequency: string, size: string) => {
@@ -75,7 +74,7 @@ const MyBasketConsumerSignPlan: React.FC = () => {
     <StyledContainer>
       <Header title='Assinatura' />
       <StyledContainerForm showsVerticalScrollIndicator={false}>
-        <Form ref={formRef} onSubmit={handleForm}>
+        <Form ref={formRef} onSubmit={handlePlan}>
           <StyledTitle>Vamos configurar seu plano</StyledTitle>
           <Label title='Escolha qual a frequência de recebimento ou retirada da sua cesta:' />
           <Radio
@@ -95,7 +94,7 @@ const MyBasketConsumerSignPlan: React.FC = () => {
           <Radio
             name='size'
             size={14}
-            options={['Pequena - R$ XX,00', 'Média - R$ XX,00', 'Grande - R$ XX,00']}
+            options={['Pequena', 'Média', 'Grande']}
             descriptions={[
               '1 tempero, 2 legumes, 2 verduras , 3 frutas',
               '2 temperos, 3 legumes, 3 verduras, 3 frutas e 1 processado',

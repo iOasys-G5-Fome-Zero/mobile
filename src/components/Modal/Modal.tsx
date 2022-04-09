@@ -10,7 +10,7 @@ interface IProps {
 const Modal: React.FC<IProps> = ({ isVisible, children }) => {
   return (
     <ModalView visible={isVisible} animationType='slide' transparent>
-      <StyledContainer>
+      <StyledContainer style={{ elevation: 5 }}>
         <StyledContentModal>{children}</StyledContentModal>
       </StyledContainer>
     </ModalView>

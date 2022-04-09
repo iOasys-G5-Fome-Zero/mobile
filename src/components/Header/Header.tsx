@@ -14,9 +14,10 @@ interface IHeaderProps {
   title: string;
   welcome?: boolean;
   size?: number;
+  nav?: any;
 }
 
-const Header: React.FC<IHeaderProps> = ({ title, welcome = false, size = 21 }) => {
+const Header: React.FC<IHeaderProps> = ({ title, welcome = false, size = 21, nav = null }) => {
   const navigation = useNavigation();
 
   return (
@@ -28,7 +29,13 @@ const Header: React.FC<IHeaderProps> = ({ title, welcome = false, size = 21 }) =
             name='arrow-left'
             size={24}
             color='#262626'
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              if (nav) {
+                nav();
+              } else {
+                navigation.goBack();
+              }
+            }}
             tvParallaxProperties={undefined}
           />
         )}

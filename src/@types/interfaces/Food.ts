@@ -11,6 +11,7 @@ export interface IFood {
   deletedAt?: string | null;
   id?: string;
   name: string;
+  imageUrl: string;
   priceWeight?: number;
   updatedAt?: string;
 }
@@ -21,7 +22,7 @@ export interface IFoodBasketResponse {
   foodID: IFood;
 }
 
-export interface IFoodInMyBasket {
+export interface IMyRemovedFood {
   foodID: string;
   quantity: number;
 }
