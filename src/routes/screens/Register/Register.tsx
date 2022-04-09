@@ -17,9 +17,7 @@ import { handleError, handleMessage } from '../../../helpers';
 import { MainStackParams } from '../../Routes';
 
 // types
-interface IForm {
-  userType: string;
-}
+import { IRegisterRequest, IRegisterResponse } from '../../../@types/interfaces/Register';
 
 type NavProps = NativeStackNavigationProp<MainStackParams, 'Onboarding'>;
 
@@ -37,7 +35,7 @@ const Register: React.FC = () => {
     navigation.navigate('Onboarding');
   };
 
-  const handleLogin: SubmitHandler<IForm> = async data => {
+  const handleLogin: SubmitHandler<IRegisterRequest> = async data => {
     try {
       const schemaRegiste = Yup.object().shape({
         userType: Yup.string().required('Obrigatório'),
@@ -71,11 +69,11 @@ const Register: React.FC = () => {
     }
   };
 
-  const setRegister = async formData => {
+  const setRegister = async (formData: IRegisterRequest) => {
     try {
       let lastName: string;
 
-      formData.name.split(' ').forEach((item, index) => {
+      formData.name.split(' ').forEach((item: string, index: number) => {
         if (index > 0) {
           lastName = `${lastName !== undefined ? lastName : ''}${index === 1 ? '' : ' '}${item}`;
         }
@@ -83,7 +81,7 @@ const Register: React.FC = () => {
 
       const firstName = formData.name.split(' ')[0];
 
-      const { data } = await api.post('/users/new-user/', {
+      const { data } = await api.post<IRegisterResponse>('/users/new-user/', {
         firstName,
         lastName,
         userType: formData.userType === 'Sou consumidor' ? 'consumer' : 'producer',

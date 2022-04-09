@@ -24,11 +24,13 @@ import {
   StyledContainerRegister,
   StyledRow,
   StyledButtonContainer,
-  StyledErrorMessage
+  StyledErrorMessage,
+  StyledLoading
 } from './styles';
 
 // types
 import { IUserResponse } from '../../../@types/interfaces/User';
+import { ILoginResponse } from '../../../@types/interfaces/Login';
 
 type NavProps = NativeStackNavigationProp<
   MainStackParams,
@@ -43,11 +45,14 @@ interface IForm {
 const Login: React.FC = () => {
   const [checked, setChecked] = useState(false);
   const [error, setError] = useState(false);
+  const [loadingLogin, setLoadingLogin] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation<NavProps>();
   const dispatch = useAppDispatch();
 
   const handleLogin: SubmitHandler<IForm> = async data => {
+    setLoadingLogin(true);
+
     try {
       const { data: dataUser } = await api.post('/auth/login', {
         phoneOrEmail: data.email,
@@ -61,6 +66,8 @@ const Login: React.FC = () => {
     } catch (err) {
       setError(true);
     }
+
+    setLoadingLogin(false);
   };
 
   const handleNavigation = (userType: string) => {
@@ -90,7 +97,7 @@ const Login: React.FC = () => {
     setChecked(status => !status);
   };
 
-  const setToken = async data => {
+  const setToken = async (data: ILoginResponse) => {
     await setGenericPassword('accessToken', data.token, {
       service: 'accessToken'
     });
@@ -102,23 +109,29 @@ const Login: React.FC = () => {
     }
   };
 
-  const refreshToken = async () => {
+  const refreshAccessToken = async () => {
     const credentials = await getGenericPassword({
       service: 'refreshToken'
     });
 
     if (credentials) {
-      const { data: dataUser } = await api.put('/auth/refresh', {
-        refresh_token: credentials.password
+      const { data } = await api.put('/auth/refresh');
+
+      await setGenericPassword('accessToken', data.token, {
+        service: 'accessToken'
       });
 
-      handleSaveUser(dataUser);
-      handleNavigation(dataUser.user_type);
+      await setGenericPassword('refreshToken', data.refresh_token, {
+        service: 'refreshToken'
+      });
+
+      handleSaveUser(data);
+      handleNavigation(data.user_type);
     }
   };
 
   useEffect(() => {
-    refreshToken();
+    refreshAccessToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -128,7 +141,7 @@ const Login: React.FC = () => {
       <Form
         initialData={{
           email: 'consumer@consumer.com',
-          password: 'Casas456$'
+          password: 'Ab123456$'
         }}
         ref={formRef}
         onSubmit={handleLogin}
@@ -156,7 +169,7 @@ const Login: React.FC = () => {
         size={14}
         onPress={() => formRef.current.submitForm()}
       >
-        ENTRAR
+        {loadingLogin ? <StyledLoading size='small' color='#fff' /> : 'Entrar'}
       </Button>
 
       <StyledContainerRegister>

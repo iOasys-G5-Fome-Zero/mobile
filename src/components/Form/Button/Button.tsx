@@ -11,11 +11,11 @@ interface IProps {
   square?: boolean;
   style?: ViewStyle;
   size?: number;
+  fontColor?: string;
   iconName?: string;
   iconType?: string;
   iconColor?: string;
   iconSize?: number;
-  addPhoneSize?: boolean;
 }
 
 const Button: React.FC<IProps> = ({
@@ -24,6 +24,7 @@ const Button: React.FC<IProps> = ({
   children,
   style,
   size = 20,
+  fontColor = '#fff',
   iconName,
   iconType,
   iconColor,
@@ -46,7 +47,7 @@ const Button: React.FC<IProps> = ({
           tvParallaxProperties={undefined}
         />
       )}
-      <StyledButtonText {...{ size }}>{children}</StyledButtonText>
+      <StyledButtonText {...{ size, fontColor }}>{children}</StyledButtonText>
     </StyledContainer>
   );
 };

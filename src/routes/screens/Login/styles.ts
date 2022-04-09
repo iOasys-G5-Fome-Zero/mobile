@@ -68,3 +68,5 @@ export const StyledErrorMessage = styled.Text`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.error};
 `;
+
+export const StyledLoading = styled.ActivityIndicator``;

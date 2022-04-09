@@ -3,6 +3,11 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { StatusBar } from 'react-native';
 import { Dimensions } from 'react-native';
 
+interface IPropsText {
+  iconLeft?: boolean;
+  size?: number;
+}
+
 const { width, height } = Dimensions.get('window');
 
 export const StyledContainer = styled.SafeAreaView`
@@ -16,7 +21,13 @@ export const StyledContainer = styled.SafeAreaView`
   padding: 0 20px;
 `;
 
-export const StyledText = styled.Text`
+export const StyledText = styled.Text<IPropsText>`
   font-family: ${({ theme }) => theme.fonts.HEADLINE};
-  font-size: ${RFValue(24)}px;
+  font-size: ${({ size }) => RFValue(size)}px;
+  margin-left: ${({ iconLeft }) => (iconLeft ? '0' : '10px')};
+`;
+
+export const StyledRow = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
