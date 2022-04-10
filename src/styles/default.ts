@@ -11,8 +11,11 @@ const themeDefault = {
     warning: '#FFD53D',
     primary: '#00843F',
     secundary: '#6CCD91',
+    third: '#6CCD91',
+    fourth: '#C1E9CF',
     lightGreen: '#C1E9CF',
-    circle: '#FF9769'
+    circle: '#FF9769',
+    circleSecunday: '#FFD1BE'
   }
 };
 
