@@ -12,41 +12,56 @@ import {
   StyledCounterBox,
   StyledButton,
   StyledColumn,
-  StyledLink
+  StyledLink,
+  StyledContainerCounter
 } from './styles';
 
 // interfaces
-import { IFoodBasketResponse } from '../../../@types/interfaces/Food';
 
 interface IProps {
-  data: IFoodBasketResponse;
+  index: number;
+  name: string;
+  label?: string;
+  image?: string;
+  maxQuantity: number;
+  justCounter?: boolean;
 }
 
-const Counter: React.FC<IProps> = ({ data }) => {
-  const [counter, setCounter] = useState(data.quantity);
+const Counter: React.FC<IProps> = ({
+  index,
+  name,
+  label = '',
+  image = '',
+  maxQuantity,
+  justCounter = false
+}) => {
+  const [counter, setCounter] = useState(justCounter ? 0 : maxQuantity);
 
-  const { fieldName, registerField } = useField(data.foodID.id);
+  const { fieldName, error, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: {},
-      getValue: () => data.quantity - counter,
+      getValue: () => {
+        if (maxQuantity) {
+          return counter;
+        }
+        return maxQuantity - counter;
+      },
       setValue: (ref, value) => setCounter(value)
     });
   });
 
-  return (
-    <StyledContainer key={data.id}>
-      <StyledImage source={{ uri: data.foodID.imageUrl }} resizeMode='cover' />
-      <StyledContinerInfo>
-        <StyledColumn>
-          <StyledText>{translateFood(data.foodID.name)}</StyledText>
-          <StyledButton>
-            <StyledLink>Ver exemplos</StyledLink>
-          </StyledButton>
-        </StyledColumn>
-        <StyledCounterBox>
+  const returnCounterBox = () => {
+    return (
+      <StyledContainerCounter>
+        {error && (
+          <StyledText style={{ marginBottom: 10 }} size={12}>
+            {error}
+          </StyledText>
+        )}
+        <StyledCounterBox key={justCounter && index}>
           <StyledButton>
             <Icon
               type='feather'
@@ -64,11 +79,30 @@ const Counter: React.FC<IProps> = ({ data }) => {
               name='plus'
               color='#262626'
               size={14}
-              onPress={() => setCounter(counter + 1 > data.quantity ? data.quantity : counter + 1)}
+              onPress={() => setCounter(counter + 1 > maxQuantity ? maxQuantity : counter + 1)}
               tvParallaxProperties={undefined}
             />
           </StyledButton>
         </StyledCounterBox>
+      </StyledContainerCounter>
+    );
+  };
+
+  if (justCounter) {
+    return returnCounterBox();
+  }
+
+  return (
+    <StyledContainer key={!justCounter && index}>
+      <StyledImage source={{ uri: image }} resizeMode='cover' />
+      <StyledContinerInfo>
+        <StyledColumn>
+          <StyledText>{translateFood(label)}</StyledText>
+          <StyledButton>
+            <StyledLink>Ver exemplos</StyledLink>
+          </StyledButton>
+        </StyledColumn>
+        {returnCounterBox()}
       </StyledContinerInfo>
     </StyledContainer>
   );

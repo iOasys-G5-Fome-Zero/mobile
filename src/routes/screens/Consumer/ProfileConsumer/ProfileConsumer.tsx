@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { TabActions, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { resetGenericPassword } from 'react-native-keychain';
 import { MainStackParams } from '../../../Routes';
@@ -23,6 +23,12 @@ const ProfileConsumer: React.FC = () => {
     await resetGenericPassword({ service: 'accessToken' });
 
     navigation.navigate('Login');
+  };
+
+  const handleNavigate = () => {
+    const jumpToSignFood = TabActions.jumpTo('ProfileMessages');
+
+    navigation.dispatch(jumpToSignFood);
   };
 
   return (
@@ -67,7 +73,7 @@ const ProfileConsumer: React.FC = () => {
           iconColor='#262626'
           iconSize={16}
           big
-          onPress={() => null}
+          onPress={() => handleNavigate()}
         >
           Mensagens
         </Button>

@@ -18,7 +18,7 @@ export const Container = styled.View<IProps>`
 export const InputContainer = styled.View`
   width: 100%;
   height: ${height * 0.07}px;
-  background-color: ${({ theme }) => theme.colors.lightGray};
+  background-color: ${({ theme }) => theme.colors.fourth};
   flex-direction: row;
   align-items: center;
   border-bottom-width: 1px;

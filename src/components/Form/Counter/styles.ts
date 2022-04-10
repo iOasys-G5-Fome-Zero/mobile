@@ -4,6 +4,10 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 const { width, height } = Dimensions.get('window');
 
+interface ITextProps {
+  size?: number;
+}
+
 export const StyledContainer = styled.View`
   height: ${height * 0.1}px;
   flex-direction: row;
@@ -29,10 +33,10 @@ export const StyledImage = styled.Image`
   border-top-left-radius: 4px;
 `;
 
-export const StyledText = styled.Text`
+export const StyledText = styled.Text<ITextProps>`
   font-family: ${({ theme }) => theme.fonts.HEADLINE};
   color: ${({ theme }) => theme.colors.black};
-  font-size: ${RFValue(14)}px;
+  font-size: ${({ size }) => (size ? `${RFValue(size)}px` : `${RFValue(14)}px`)};
 `;
 
 export const StyledColumn = styled.View`
@@ -60,4 +64,9 @@ export const StyledLink = styled.Text`
   font-size: ${RFValue(12)}px;
   color: ${({ theme }) => theme.colors.primary};
   text-decoration: underline;
+`;
+
+export const StyledContainerCounter = styled.View`
+  justify-content: center;
+  align-items: center;
 `;

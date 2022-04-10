@@ -4,7 +4,7 @@ const themeDefault = {
   },
   colors: {
     gray: '#C4C4C4',
-    lightGray: '#F8F8F8',
+    lightGray: '#DDE0EA',
     white: '#FFFFFF',
     black: '#262626',
     error: '#FF0000',

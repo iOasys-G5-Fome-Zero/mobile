@@ -22,7 +22,7 @@ import { Header, Radio, Button, Modal, PickerFile } from '../../../../components
 import {
   StyledContainer,
   StyledTitle,
-  StyledContainerForm,
+  StyledContainerScroll,
   StyledText,
   StyledBox,
   StyledRow,
@@ -163,11 +163,11 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
           <BasketVegetableIcon />
         </StyledCircle>
 
-        <StyledText size={16} align bold color='#00843F'>
+        <StyledText size={16} textAlign='center' bold color='#00843F'>
           Seu pedido foi confirmado e está sendo preparado!
         </StyledText>
 
-        <StyledText size={14} align>
+        <StyledText size={14} textAlign='center'>
           Para combinar a entrega entre em contato com o produtor pelo chat. Te enviaremos uma
           notificação??
         </StyledText>
@@ -208,7 +208,7 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
         title='Confirmação do pedido'
         nav={() => handleNavigate('MyBasketConsumerSignFood', { myBasket: route.params.myBasket })}
       />
-      <StyledContainerForm showsVerticalScrollIndicator={false}>
+      <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <StyledTitle>Entrega</StyledTitle>
         <StyledText size={14}>
           Escolha se você prefere retirar sua cesta em um dos nossos pontos de coleta, ou receber em
@@ -272,7 +272,7 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
         >
           {loading ? <StyledLoading size='small' color='#fff' /> : 'Concluir compra'}
         </Button>
-      </StyledContainerForm>
+      </StyledContainerScroll>
       {returnModal()}
     </StyledContainer>
   );

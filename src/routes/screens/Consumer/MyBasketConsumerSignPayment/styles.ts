@@ -3,7 +3,8 @@ import { Dimensions } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import {
-  StyledContainerForm as Scroll,
+  StyledContainer as Container,
+  StyledContainerScroll as Scroll,
   StyledText as Text,
   StyledRow as Row,
   StyledContainerCloseModal as ContainerCloseModal,
@@ -16,11 +17,11 @@ interface IPropsRow {
   between?: boolean;
 }
 
-export const StyledContainer = styled.SafeAreaView`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+export const StyledContainer = styled(Container)``;
+export const StyledContainerScroll = styled(Scroll)``;
+export const StyledText = styled(Text)``;
+export const StyledContainerCloseModal = styled(ContainerCloseModal)``;
+export const StyledCircle = styled(Circle)``;
 
 export const StyledTitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.HEADLINE};
@@ -44,7 +45,3 @@ export const StyledRow = styled(Row)<IPropsRow>`
 `;
 
 export const StyledLoading = styled.ActivityIndicator``;
-export const StyledContainerForm = styled(Scroll)``;
-export const StyledText = styled(Text)``;
-export const StyledContainerCloseModal = styled(ContainerCloseModal)``;
-export const StyledCircle = styled(Circle)``;

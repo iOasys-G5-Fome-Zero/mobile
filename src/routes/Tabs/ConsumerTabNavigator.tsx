@@ -73,13 +73,13 @@ const ReturnTopTabMyBasketConsumer = () => {
 const ReturnTopTabProfileConsumer = () => {
   return (
     <TopTab.Navigator
-      initialRouteName='ProfileConsumer'
+      initialRouteName='ProfileConsumerHome'
       screenOptions={{
         swipeEnabled: false,
         tabBarStyle: { display: 'none' }
       }}
     >
-      <TopTab.Screen name='ProfileConsumer' component={ProfileConsumer} />
+      <TopTab.Screen name='ProfileConsumerHome' component={ProfileConsumer} />
       <TopTab.Screen name='ProfileMessages' component={ProfileMessages} />
     </TopTab.Navigator>
   );

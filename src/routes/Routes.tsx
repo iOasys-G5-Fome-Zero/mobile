@@ -3,11 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
 import { useAppSelector } from '../store/store';
+import { IFriend } from '../@types/interfaces/Friend';
 
 // screens
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Onboarding from './screens/Onboarding/Onboarding';
+import Chat from './screens/Chat/Chat';
 
 import ProducerTabNavigator from './tabs/ProducerTabNavigator';
 import ConsumerTabNavigator from './tabs/ConsumerTabNavigator';
@@ -22,6 +24,7 @@ export type MainStackParams = {
   ConsumerTabNavigator: undefined;
   Onboarding: undefined;
   WebView: undefined;
+  Chat: IFriend;
 };
 
 const Main = createNativeStackNavigator<MainStackParams>();
@@ -56,6 +59,7 @@ const Routes: React.FC = () => {
         <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
         <Main.Screen name='Onboarding' component={Onboarding} />
         <Main.Screen name='WebView' component={WebView} />
+        <Main.Screen name='Chat' component={Chat} />
       </Main.Navigator>
     </NavigationContainer>
   );
