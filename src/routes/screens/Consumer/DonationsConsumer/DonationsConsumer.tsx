@@ -3,8 +3,8 @@ import * as Yup from 'yup';
 import { Icon } from 'react-native-elements';
 import { Form } from '@unform/mobile';
 import { SubmitHandler } from '@unform/core';
+import { useGetMyCoins } from '../../../../hooks';
 // import { prettyLog } from '../../../../helpers';
-// import { useGetMyCoins } from '../../../../hooks';
 
 // mocks
 import { data_ongs } from '../../../../services/mocks';
@@ -31,6 +31,7 @@ const DonationConsumer: React.FC = () => {
   const [titleOng, setTitleOng] = useState('');
   const [loading, setLoading] = useState(false);
   const [confirmDonation, setConfirmDonation] = useState(false);
+  const coins = useGetMyCoins();
   const formRef = useRef(null);
 
   const handleDonationCoins: SubmitHandler<any> = async data => {
@@ -102,7 +103,7 @@ const DonationConsumer: React.FC = () => {
               {`Você escolheu doar para a ${titleOng}!`}
             </StyledText>
             <StyledText size={14} bold margin>
-              Você tem 10 moedas
+              {`Você tem ${coins} HortCoin`}
             </StyledText>
             <StyledText size={14} margin>
               Quantas moedas deseja doar?
@@ -112,7 +113,7 @@ const DonationConsumer: React.FC = () => {
               ref={formRef}
               onSubmit={handleDonationCoins}
             >
-              <Counter name='doar' maxQuantity={10} index={1} justCounter />
+              <Counter name='doar' maxQuantity={Number(coins)} index={1} justCounter />
             </Form>
             <StyledRow>
               <Button
@@ -151,7 +152,7 @@ const DonationConsumer: React.FC = () => {
           Saldo de moedas Horticoins gerados da sua cesta
         </StyledText>
         <StyledText size={24} bold>
-          {10}
+          {coins || '0'}
         </StyledText>
         <HortCoinIcon style={{ marginTop: 2 }} />
       </StyledContainerInfo>

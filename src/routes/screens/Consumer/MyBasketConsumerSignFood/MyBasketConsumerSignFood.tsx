@@ -160,6 +160,7 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
               <Counter
                 index={index}
                 name={food.foodID.id}
+                label={food.foodID.name}
                 image={food.foodID.imageUrl}
                 maxQuantity={food.quantity}
               />

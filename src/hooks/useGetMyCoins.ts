@@ -9,7 +9,7 @@ const useGetMyCoins = () => {
     try {
       const { data } = await api.get(`/consumers/get-cryptos/`);
 
-      setCoins(data);
+      setCoins(data.cryptoCoins);
     } catch (error) {
       handleError(error);
     }

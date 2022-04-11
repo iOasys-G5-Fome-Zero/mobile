@@ -8,3 +8,4 @@ export { default as Label } from './Form/Label/Label';
 export { default as Counter } from './Form/Counter/Counter';
 export { default as Modal } from './Modal/Modal';
 export { default as PickerFile } from './Form/PickerFile/PickerFile';
+export { default as Checkbox } from './Form/Checkbox/Checkbox';

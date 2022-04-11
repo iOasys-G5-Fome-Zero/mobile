@@ -13,6 +13,7 @@ export const StyledContainer = styled.ScrollView`
   flex: 1;
   width: 85%;
   align-self: center;
+  padding: 50px 0;
 `;
 
 export const StyledText = styled.Text<ITextProps>`
@@ -24,6 +25,7 @@ export const StyledSaveLogin = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 20px;
 `;
 
 export const StyledSaveLoginText = styled.Text`
