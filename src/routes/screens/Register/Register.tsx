@@ -121,16 +121,12 @@ const Register: React.FC = () => {
         onSubmit={handleLogin}
       >
         <Radio name='userType' options={['Sou produtor', 'Sou consumidor']} size={14} />
-        <Input name='name' placeholder='Nome' />
+        <Input name='name' placeholder='Nome' containerStyle={{ marginTop: 20 }} />
         <Input name='email' placeholder='E-mail' />
         <Input name='password' placeholder='Senha' secureTextEntry />
-        <StyledText size={12}>A senha deve conter:</StyledText>
-        <StyledText size={12}>Pelo menos 1 letra</StyledText>
-        <StyledText size={12}>Pelo menos 1 dígito</StyledText>
-        <StyledText size={12} style={{ marginBottom: 20 }}>
-          Pelo menos 1 caractere especial
+        <StyledText size={12}>
+          A senha deve conter pelo menos 6 caracteres, incluindo letras e números.
         </StyledText>
-        <Input name='confirmPassword' placeholder='Confirmar senha' secureTextEntry />
       </Form>
 
       <StyledSaveLogin>

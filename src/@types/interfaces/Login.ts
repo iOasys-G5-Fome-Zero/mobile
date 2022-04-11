@@ -1,6 +1,7 @@
 export interface ILogin {
   phoneOrEmail: string;
   password: string;
+  checked?: boolean;
 }
 
 export interface ILoginResponse {

@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import { RouteProp, TabActions, useNavigation } from '@react-navigation/native';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { translateBasket, getTotalItemsBasket } from '../../../../helpers';
+import { IFoodBasketResponse } from '../../../../@types/interfaces/Food';
 
 // icons
 import VegetableIcon from '../../../../assets/icons/vegetable.svg';
@@ -13,7 +14,7 @@ import { Header, Counter, Button, Modal } from '../../../../components';
 import {
   StyledText,
   StyledContainer,
-  StyledContainerForm,
+  StyledContainerScroll,
   StyledContainerWarning,
   StyledRow,
   StyledCircle,
@@ -85,11 +86,11 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
           <VegetableIcon />
         </StyledCircle>
 
-        <StyledText size={16} align bold color='#00843F'>
+        <StyledText size={16} textAlign='center' bold color='#00843F'>
           {`Você está doando ${quantityFoodsDonation} itens da sua cesta`}
         </StyledText>
 
-        <StyledText size={14} align>
+        <StyledText size={14} textAlign='center'>
           Estes itens serão doados para uma instituição que atua no combate a fome. Você pode
           escolher para qual instituição doar na seção de Doações.
         </StyledText>
@@ -133,7 +134,7 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
   return (
     <StyledContainer>
       <Header title='Assinatura' nav={() => handleNavigate('MyBasketConsumerSignPlan')} />
-      <StyledContainerForm showsVerticalScrollIndicator={false}>
+      <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <StyledText size={14}>
           {`Você escolheu a cesta de tamanho ${translateBasket(
             route.params?.myBasket.basket_size
@@ -142,11 +143,11 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
           )} itens), selecione quantas porções de cada categoria deseja receber.`}
         </StyledText>
         <StyledContainerWarning>
-          <StyledText align bold size={16}>
+          <StyledText textAlign='center' bold size={16}>
             Importante!
           </StyledText>
 
-          <StyledText align size={14}>
+          <StyledText textAlign='center' size={14}>
             Cada unidade de alimento retirada da sua cesta, é convertida em Horticoins, nossa moeda
             virtual que é utilizada por instituições parceiras para adquirir alimentos e ajudar no
             combate a fome!
@@ -155,7 +156,15 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
 
         <Form ref={formRef} onSubmit={handleFood}>
           {foods ? (
-            foods.map(food => <Counter data={food} />)
+            foods.map((food: IFoodBasketResponse, index: number) => (
+              <Counter
+                index={index}
+                name={food.foodID.id}
+                label={food.foodID.name}
+                image={food.foodID.imageUrl}
+                maxQuantity={food.quantity}
+              />
+            ))
           ) : (
             <StyledLoading size='small' color='#00843F' />
           )}
@@ -170,7 +179,7 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
             Próximo
           </Button>
         </Form>
-      </StyledContainerForm>
+      </StyledContainerScroll>
       {returnModal()}
     </StyledContainer>
   );

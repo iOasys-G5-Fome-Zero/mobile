@@ -10,7 +10,7 @@ import { api } from '../../../../services/api';
 import { Header, Radio, Label, Button } from '../../../../components';
 
 // styled components
-import { StyledContainer, StyledTitle, StyledContainerForm } from './styles';
+import { StyledContainer, StyledTitle, StyledContainerScroll } from './styles';
 
 // interfaces
 import { IProducerBaskets } from '../../../../@types/interfaces/Basket';
@@ -73,7 +73,7 @@ const MyBasketConsumerSignPlan: React.FC = () => {
   return (
     <StyledContainer>
       <Header title='Assinatura' />
-      <StyledContainerForm showsVerticalScrollIndicator={false}>
+      <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <Form ref={formRef} onSubmit={handlePlan}>
           <StyledTitle>Vamos configurar seu plano</StyledTitle>
           <Label title='Escolha qual a frequência de recebimento ou retirada da sua cesta:' />
@@ -119,7 +119,7 @@ const MyBasketConsumerSignPlan: React.FC = () => {
         >
           Próximo
         </Button>
-      </StyledContainerForm>
+      </StyledContainerScroll>
     </StyledContainer>
   );
 };

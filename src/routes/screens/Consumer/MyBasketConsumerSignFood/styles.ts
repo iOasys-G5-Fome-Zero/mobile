@@ -1,33 +1,21 @@
 import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
-import { RFValue } from 'react-native-responsive-fontsize';
+
+import {
+  StyledContainer as Container,
+  StyledContainerScroll as Scroll,
+  StyledText as Text
+} from '../HomeConsumer/styles';
 
 const { height } = Dimensions.get('window');
 
-interface ITextProps {
-  size: number;
-  align?: boolean;
-  bold?: boolean;
-  color?: string;
-}
+export const StyledContainer = styled(Container)``;
 
-export const StyledContainer = styled.SafeAreaView`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+export const StyledContainerScroll = styled(Scroll)`
+  width: 90%;
+  padding: 40px 0;
 `;
-
-export const StyledContainerForm = styled.ScrollView`
-  width: 85%;
-  padding-top: 40px;
-`;
-
-export const StyledText = styled.Text<ITextProps>`
-  font-family: ${({ theme }) => theme.fonts.HEADLINE};
-  color: ${({ theme, color }) => color || theme.colors.black};
-  font-size: ${({ size }) => RFValue(size)}px;
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
-  text-align: ${({ align }) => (align ? 'center' : 'left')};
+export const StyledText = styled(Text)`
   margin-bottom: ${height * 0.025}px;
 `;
 

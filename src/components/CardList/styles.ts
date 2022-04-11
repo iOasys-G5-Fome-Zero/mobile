@@ -17,8 +17,11 @@ export const StyledContainer = styled.View`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${height * 0.04}px;
+  margin-bottom: ${height * 0.05}px;
+  margin-top: ${height * 0.025}px;
 `;
+
+export const StyledText = styled.Text``;
 
 export const StyledCardContainer = styled.TouchableOpacity<IImageProps>`
   width: ${({ columns }) => (columns ? `${(width * 0.9) / columns - 10}px` : '100%')};
@@ -44,3 +47,13 @@ export const StyledCardTitle = styled.Text<ICardTitle>`
   text-align: center;
   margin-top: 8px;
 `;
+
+export const StyledContainerBackgroundBarProgress = styled.View`
+  width: 100%;
+  height: 12px;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.circleSecunday};
+  margin-top: 8px;
+`;
+
+export const StyledContainerBarProgress = styled.View``;

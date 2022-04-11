@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
 
-export const StyledContainer = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+import {
+  StyledContainer as Container,
+  StyledContainerScroll as Scroll,
+  StyledText as Text
+} from '../HomeConsumer/styles';
 
-export const StyledTitle = styled.Text``;
+export const StyledContainer = styled(Container)``;
+export const StyledContainerScroll = styled(Scroll)``;
+export const StyledText = styled(Text)``;

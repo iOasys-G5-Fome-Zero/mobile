@@ -4,15 +4,18 @@ const themeDefault = {
   },
   colors: {
     gray: '#C4C4C4',
-    lightGray: '#F8F8F8',
+    lightGray: '#DDE0EA',
     white: '#FFFFFF',
     black: '#262626',
     error: '#FF0000',
     warning: '#FFD53D',
     primary: '#00843F',
     secundary: '#6CCD91',
-    lightGreen: '#C1E9CF',
-    circle: '#FF9769'
+    third: '#6CCD91',
+    fourth: '#C1E9CF',
+    lightGreen: '#F8FFFA',
+    circle: '#FF9769',
+    circleSecunday: '#FFD1BE'
   }
 };
 

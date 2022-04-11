@@ -14,6 +14,7 @@ import {
   MyBasketConsumerSignPlan,
   DonationsConsumer,
   ProfileConsumer,
+  ProfileMessages,
   MyBasketConsumerSignFood,
   MyBasketConsumerSignPayment
 } from '../screens/Consumer';
@@ -29,6 +30,11 @@ export type TopTabMyBasketConsumerStackParams = {
   MyBasketConsumerSignPlan: undefined;
   MyBasketConsumerSignFood: undefined;
   MyBasketConsumerSignPayment: undefined;
+};
+
+export type TopTabProfileConsumerStackParams = {
+  ProfileConsumer: undefined;
+  ProfileMessages: undefined;
 };
 
 const BottomTab = createMaterialBottomTabNavigator();
@@ -60,6 +66,21 @@ const ReturnTopTabMyBasketConsumer = () => {
       <TopTab.Screen name='MyBasketConsumerSignPlan' component={MyBasketConsumerSignPlan} />
       <TopTab.Screen name='MyBasketConsumerSignFood' component={MyBasketConsumerSignFood} />
       <TopTab.Screen name='MyBasketConsumerSignPayment' component={MyBasketConsumerSignPayment} />
+    </TopTab.Navigator>
+  );
+};
+
+const ReturnTopTabProfileConsumer = () => {
+  return (
+    <TopTab.Navigator
+      initialRouteName='ProfileConsumerHome'
+      screenOptions={{
+        swipeEnabled: false,
+        tabBarStyle: { display: 'none' }
+      }}
+    >
+      <TopTab.Screen name='ProfileConsumerHome' component={ProfileConsumer} />
+      <TopTab.Screen name='ProfileMessages' component={ProfileMessages} />
     </TopTab.Navigator>
   );
 };
@@ -102,7 +123,7 @@ const ConsumerTabNavigator: React.FC = () => {
           tabBarLabel: 'Perfil',
           tabBarIcon: ({ focused }) => retunrIconTab({ icon: 'profile', focused })
         }}
-        component={ProfileConsumer}
+        component={ReturnTopTabProfileConsumer}
       />
     </BottomTab.Navigator>
   );
