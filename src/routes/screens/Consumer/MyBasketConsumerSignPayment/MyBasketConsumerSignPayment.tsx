@@ -12,7 +12,7 @@ import { api } from '../../../../services/api';
 import { IProducerBaskets } from '../../../../@types/interfaces/Basket';
 import { IDelivery } from '../../../../@types/interfaces/Delivery';
 import { IMyRemovedFood } from '../../../../@types/interfaces/Food';
-import { BottomTabConsumerStackParams } from '../../../tabs/ConsumerTabNavigator';
+import { BottomTabConsumerStackParams } from '../../../Tabs/ConsumerTabNavigator';
 
 // icons
 import BasketVegetableIcon from '../../../../assets/icons/vegetable-basket.svg';
@@ -121,6 +121,8 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
     try {
       await api.delete('/consumers/basket/delete-removed-foods');
       await api.post(`/consumers/basket/set-removed-foods`, route.params.myRemovedFoodsBasket);
+
+      prettyLog('removeu as comidas da cesta');
     } catch (error) {
       // preciso de ajuda
       prettyLog('erro ao remover as comidas');
@@ -130,7 +132,7 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
   const sendReceipt = async ({ file }) => {
     try {
       const data = new FormData();
-      data.append('document', file);
+      data.append('file', file);
 
       await api.post(`/consumers/receipt/upload`, data, {
         headers: {

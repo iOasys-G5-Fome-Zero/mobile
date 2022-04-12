@@ -23,7 +23,7 @@ const Checkbox: React.FC<IProps> = ({
   size = 18,
   containerStyle = {},
   subOptions = [],
-  bigBox = [false]
+  bigBox = false
 }) => {
   const checkRefs = useRef([]);
   const [checkedOptions, setCheckedOptions] = useState([]);
@@ -168,19 +168,23 @@ const Checkbox: React.FC<IProps> = ({
   return (
     <Container style={[containerStyle]}>
       {options.map((item, index) => {
-        return (
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: '#00843F',
-              marginHorizontal: 20,
-              marginVertical: 14,
-              padding: 16
-            }}
-          >
-            {returnOptions(item, index)}
-          </View>
-        );
+        if (bigBox) {
+          return (
+            <View
+              style={{
+                borderWidth: 1,
+                borderColor: '#00843F',
+                marginHorizontal: 20,
+                marginVertical: 14,
+                padding: 16
+              }}
+            >
+              {returnOptions(item, index)}
+            </View>
+          );
+        }
+        return returnOptions(item, index);
+
       })}
     </Container>
   );

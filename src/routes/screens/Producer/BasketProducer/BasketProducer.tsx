@@ -1,26 +1,16 @@
+import React, { useRef } from 'react';
 import { Form } from '@unform/mobile';
-import React, { useState, useRef } from 'react';
+import { prettyLog } from '../../../../helpers';
 
 // components
 import { Header, Button, Checkbox } from '../../../../components';
-import {
-  StyledContainer,
-  StyledTitle,
-  StyledText,
-  StyledContainerCestas,
-  StyledSaveCestas,
-  StyledSaveCestasText,
-  StyledSaveCestasTitle
-} from './styles';
+import { StyledContainer, StyledTitle, StyledText } from './styles';
 
 const BasketProducer: React.FC = () => {
   const formRef = useRef(null);
-  const [checked, setChecked] = useState(false);
-  const handleCheckBox = () => {
-    setChecked(status => !status);
-  };
-  const formHandle = data => {
-    console.log(data);
+
+  const formHandle = (data: { producer_basket: string }) => {
+    prettyLog(data);
   };
   const returnBasket = () => {
     return (
@@ -28,7 +18,7 @@ const BasketProducer: React.FC = () => {
         <Form ref={formRef} onSubmit={formHandle}>
           <Checkbox
             bigBox
-            name='small'
+            name='producer_basket'
             size={14}
             options={['Pequena', 'Média', 'Grande']}
             subOptions={[

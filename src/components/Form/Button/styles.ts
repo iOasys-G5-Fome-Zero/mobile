@@ -33,6 +33,6 @@ export const StyledContainer = styled.TouchableOpacity<IButtonProps>`
 export const StyledButtonText = styled.Text<ITextProps>`
   font-family: ${({ theme }) => theme.fonts.HEADLINE};
   font-size: ${props => RFValue(props.size)}px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ fontColor }) => fontColor};
   text-align: center;
 `;

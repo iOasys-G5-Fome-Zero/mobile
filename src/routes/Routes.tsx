@@ -13,7 +13,7 @@ import BasketProducer from './screens/Producer/BasketProducer/BasketProducer';
 import Chat from './screens/Chat/Chat';
 
 import ProducerTabNavigator from './Tabs/ProducerTabNavigator';
-import ConsumerTabNavigator from './Tabs/ProducerTabNavigator';
+import ConsumerTabNavigator from './Tabs/ConsumerTabNavigator';
 
 import { WebView } from '../components';
 
