@@ -57,7 +57,7 @@ const retunrIconTab = ({ icon, focused }) => {
 const ReturnTopTabMyBasketConsumer = () => {
   return (
     <TopTab.Navigator
-      initialRouteName='MyBasketConsumerSignPayment'
+      initialRouteName='MyBasketConsumerSignPlan'
       screenOptions={{
         swipeEnabled: false,
         tabBarStyle: { display: 'none' }

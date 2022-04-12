@@ -54,10 +54,14 @@ const Login: React.FC = () => {
     setLoadingLogin(true);
 
     try {
-      const { data: dataUser } = await api.post('/auth/login', {
-        phoneOrEmail: data.email,
-        password: data.password
-      });
+      const { data: dataUser } = await api.post(
+        '/auth/login',
+        {
+          phoneOrEmail: data.email,
+          password: data.password
+        },
+        { timeout: 10000 }
+      );
 
       setToken(dataUser, !!data.checked);
       handleNavigation(dataUser.user_type);

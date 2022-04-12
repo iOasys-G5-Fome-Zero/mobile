@@ -18,6 +18,8 @@ const { width, height } = Dimensions.get('window');
 export const StyledContainer = styled.TouchableOpacity<IButtonProps>`
   width: ${width * 0.5}px;
   height: ${height * 0.07}px;
+  background-color: ${({ theme }) => theme.colors.gray};
+  border-radius: 4px;
   flex-direction: row;
   align-items: center;
   justify-content: ${({ big }) => (big ? 'space-between' : 'center')};
@@ -31,6 +33,6 @@ export const StyledContainer = styled.TouchableOpacity<IButtonProps>`
 export const StyledButtonText = styled.Text<ITextProps>`
   font-family: ${({ theme }) => theme.fonts.HEADLINE};
   font-size: ${props => RFValue(props.size)}px;
-  color: ${({ theme, fontColor }) => fontColor || theme.colors.white};
+  color: ${({ fontColor }) => fontColor};
   text-align: center;
 `;

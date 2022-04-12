@@ -9,10 +9,11 @@ import { IFriend } from '../@types/interfaces/Friend';
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Onboarding from './screens/Onboarding/Onboarding';
+import BasketProducer from './screens/Producer/BasketProducer/BasketProducer';
 import Chat from './screens/Chat/Chat';
 
-import ProducerTabNavigator from './tabs/ProducerTabNavigator';
-import ConsumerTabNavigator from './tabs/ConsumerTabNavigator';
+import ProducerTabNavigator from './Tabs/ProducerTabNavigator';
+import ConsumerTabNavigator from './Tabs/ConsumerTabNavigator';
 
 import { WebView } from '../components';
 
@@ -23,6 +24,7 @@ export type MainStackParams = {
   ProducerTabNavigator: undefined;
   ConsumerTabNavigator: undefined;
   Onboarding: undefined;
+  BasketProducer: undefined;
   WebView: undefined;
   Chat: IFriend;
 };
@@ -47,7 +49,7 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='Onboarding'
+        initialRouteName='Login'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }
@@ -58,6 +60,7 @@ const Routes: React.FC = () => {
         <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
         <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
         <Main.Screen name='Onboarding' component={Onboarding} />
+        <Main.Screen name='BasketProducer' component={BasketProducer} />
         <Main.Screen name='WebView' component={WebView} />
         <Main.Screen name='Chat' component={Chat} />
       </Main.Navigator>
