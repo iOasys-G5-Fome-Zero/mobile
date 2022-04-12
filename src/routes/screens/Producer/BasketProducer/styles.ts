@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Dimensions } from 'react-native';
 
-const { height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 interface ITextProps {
   size?: number;
@@ -17,30 +17,36 @@ export const StyledContainer = styled.View`
 
 export const StyledContainerCestas = styled.View`
   border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.gray};
+  border-color: ${({ theme }) => theme.colors.primary};
   margin: 8px 20px;
-  padding: 16px 16px;
+  padding: 14px 16px;
 `;
 
-export const StyledButtonNext = styled.TouchableOpacity`
-  background-color: ${({ theme }) => theme.colors.third};
-  border-radius: 3.75px;
-  height: 72px;
-  width: 320px;
-  justify-content: center;
+export const StyledSaveCestas = styled.View`
+  flex-direction: row;
   align-items: center;
-  align-self: center;
-  margin-bottom: ${height * 0.025}px;
+  justify-content: flex-start;
 `;
-export const StyledButtonText = styled.Text`
-  color: ${({ theme }) => theme.colors.black};
+
+export const StyledSaveCestasTitle = styled.Text`
   font-size: ${RFValue(14)}px;
+  color: ${({ theme }) => theme.colors.black};
+  margin-bottom: 17px;
   font-weight: bold;
+`;
+
+export const StyledSaveCestasText = styled.Text`
+  font-size: ${RFValue(12)}px;
+  color: ${({ theme }) => theme.colors.black};
+  margin-top: 8px;
+  margin-left: 66px;
 `;
 
 export const StyledText = styled.Text`
   margin-bottom: 24px;
   font-size: ${RFValue(12)}px;
+  padding: 0px 24px;
+  margin-top: ${width * -0.05}px;
 `;
 
 export const StyledTitle = styled.Text<ITextProps>`
@@ -49,5 +55,5 @@ export const StyledTitle = styled.Text<ITextProps>`
   color: ${({ color, theme }) => (color ? `${color}` : theme.colors.black)};
   font-weight: ${({ bold }) => (bold ? '700' : 'normal')};
   text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : 'left')};
-  padding: 24px 20px;
+  padding: 32px 24px;
 `;
