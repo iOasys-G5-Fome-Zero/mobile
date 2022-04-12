@@ -49,7 +49,7 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='Login'
+        initialRouteName='BasketProducer'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }

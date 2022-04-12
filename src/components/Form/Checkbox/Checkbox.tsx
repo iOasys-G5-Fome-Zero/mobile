@@ -184,6 +184,7 @@ const Checkbox: React.FC<IProps> = ({
           );
         }
         return returnOptions(item, index);
+
       })}
     </Container>
   );
