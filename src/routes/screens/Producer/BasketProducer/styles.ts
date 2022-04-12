@@ -38,9 +38,8 @@ export const StyledSaveCestasTitle = styled.Text`
 export const StyledSaveCestasText = styled.Text`
   font-size: ${RFValue(12)}px;
   color: ${({ theme }) => theme.colors.black};
-  margin-top: 46px;
-  margin-left: ${width * -0.135}px;
-  margin-bottom: 20px;
+  margin-top: 8px;
+  margin-left: 66px;
 `;
 
 export const StyledText = styled.Text`

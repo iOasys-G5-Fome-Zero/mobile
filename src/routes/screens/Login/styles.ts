@@ -6,6 +6,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 interface ITextProps {
   size?: number;
   bold?: boolean;
+  link?: boolean;
 }
 
 const { height, width } = Dimensions.get('window');
@@ -31,6 +32,7 @@ export const StyledContainerForgotPassword = styled.View`
 export const StyledText = styled.Text<ITextProps>`
   font-size: ${({ size }) => (size ? RFValue(size) : 14)}px;
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  color: ${({ theme, link }) => (link ? theme.colors.primary : theme.colors.black)};
 `;
 
 export const StyledSaveLogin = styled.View`
@@ -68,3 +70,5 @@ export const StyledErrorMessage = styled.Text`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.error};
 `;
+
+export const StyledLoading = styled.ActivityIndicator``;

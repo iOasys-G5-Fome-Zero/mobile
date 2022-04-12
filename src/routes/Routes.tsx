@@ -3,12 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
 import { useAppSelector } from '../store/store';
+import { IFriend } from '../@types/interfaces/Friend';
 
 // screens
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Onboarding from './screens/Onboarding/Onboarding';
 import BasketProducer from './screens/Producer/BasketProducer/BasketProducer';
+import Chat from './screens/Chat/Chat';
 
 import ProducerTabNavigator from './Tabs/ProducerTabNavigator';
 import ConsumerTabNavigator from './Tabs/ProducerTabNavigator';
@@ -23,6 +25,8 @@ export type MainStackParams = {
   ConsumerTabNavigator: undefined;
   Onboarding: undefined;
   BasketProducer: undefined;
+  WebView: undefined;
+  Chat: IFriend;
 };
 
 const Main = createNativeStackNavigator<MainStackParams>();
@@ -40,12 +44,12 @@ const Routes: React.FC = () => {
     }
   });
 
-  if (goWeb) return <WebView />;
+  // if (goWeb) return <WebView />;
 
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='Login'
+        initialRouteName='BasketProducer'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }
@@ -57,6 +61,8 @@ const Routes: React.FC = () => {
         <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
         <Main.Screen name='Onboarding' component={Onboarding} />
         <Main.Screen name='BasketProducer' component={BasketProducer} />
+        <Main.Screen name='WebView' component={WebView} />
+        <Main.Screen name='Chat' component={Chat} />
       </Main.Navigator>
     </NavigationContainer>
   );

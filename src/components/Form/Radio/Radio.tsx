@@ -1,17 +1,34 @@
 import React, { useEffect, useRef } from 'react';
+import { StyleProp, ViewStyle, View } from 'react-native';
 import { useField } from '@unform/core';
 
 // components
-import { Container, ErrorMessage, CheckButton, Check, Label } from './styles';
+import {
+  StyledContainer,
+  ErrorMessage,
+  CheckButton,
+  StyledBorderCheckBox,
+  StyledCheckBox,
+  Label,
+  StyledContainerCheck
+} from './styles';
 
 // types
 interface IProps {
   options: string[];
   name: string;
   size?: number;
+  containerStyle?: StyleProp<ViewStyle>;
+  descriptions?: string[];
 }
 
-const Radio: React.FC<IProps> = ({ options, name, size = 18 }) => {
+const Radio: React.FC<IProps> = ({
+  options,
+  name,
+  size = 18,
+  containerStyle = {},
+  descriptions = []
+}) => {
   const checkRefs = useRef([]);
 
   const { defaultValue, error, fieldName, registerField } = useField(name);
@@ -49,7 +66,7 @@ const Radio: React.FC<IProps> = ({ options, name, size = 18 }) => {
     checkRefs.current[index].value = item;
     checkRefs.current[index].setNativeProps({
       style: {
-        backgroundColor: '#283036'
+        backgroundColor: '#00843F'
       }
     });
   };
@@ -59,7 +76,7 @@ const Radio: React.FC<IProps> = ({ options, name, size = 18 }) => {
       ref.checked = false;
       ref.setNativeProps({
         style: {
-          backgroundColor: '#fff'
+          backgroundColor: '#FFFFFF'
         }
       });
     });
@@ -69,23 +86,35 @@ const Radio: React.FC<IProps> = ({ options, name, size = 18 }) => {
 
   const renderItem = ({ item, index }) => {
     return (
-      <Container key={index}>
+      <StyledContainer key={index} style={[containerStyle, {}]}>
         {index === 0 && error && <ErrorMessage>{error}</ErrorMessage>}
         <CheckButton
           key={index.toString()}
           onPress={() => handleCheck(index, item)}
           style={{ paddingTop: index === 0 && error ? 10 : 0 }}
         >
-          <Label size={size}>
-            <Check
-              ref={ref => {
-                checkRefs.current[index] = ref;
-              }}
-            />{' '}
-            {` ${item}`}
-          </Label>
+          <StyledContainerCheck>
+            <StyledBorderCheckBox>
+              <StyledCheckBox
+                ref={ref => {
+                  checkRefs.current[index] = ref;
+                }}
+                style={{
+                  width: '80%',
+                  height: '80%',
+                  alignSelf: 'center',
+                  borderRadius: 50,
+                  backgroundColor: '#FFFF'
+                }}
+              />
+            </StyledBorderCheckBox>
+            <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+              <Label size={size}>{`${item}`}</Label>
+              {descriptions[index] && <Label size={12}>{descriptions[index]}</Label>}
+            </View>
+          </StyledContainerCheck>
         </CheckButton>
-      </Container>
+      </StyledContainer>
     );
   };
 

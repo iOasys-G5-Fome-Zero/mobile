@@ -18,16 +18,18 @@ export const Container = styled.View<IProps>`
 export const InputContainer = styled.View`
   width: 100%;
   height: ${height * 0.07}px;
-  background-color: ${({ theme }) => theme.colors.lightGray};
+  background-color: ${({ theme }) => theme.colors.lightGreen};
   flex-direction: row;
   align-items: center;
   border-bottom-width: 1px;
+  border-color: ${({ theme }) => theme.colors.black};
   padding: 0px 16px;
 `;
 
 export const TextInput = styled.TextInput<IProps>`
   flex: 1;
   font-size: ${RFValue(14)}px;
+  margin-top: 15px;
 `;
 
 export const ErrorMessage = styled.Text`
@@ -35,3 +37,5 @@ export const ErrorMessage = styled.Text`
   font-size: ${RFValue(10)}px;
   font-weight: bold;
 `;
+
+export const StyledPlaceholder = styled.Text``;

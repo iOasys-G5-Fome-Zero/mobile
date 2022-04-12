@@ -9,6 +9,7 @@ import { data_presentation, data_our_services, data_ongs } from '../../../../ser
 import { Header, CardList } from '../../../../components';
 import {
   StyledContainer,
+  StyledContainerScroll,
   StyledSwiperImage,
   StyledCardSwiper,
   StyledText,
@@ -44,9 +45,9 @@ const HomeConsumer: React.FC = () => {
   };
 
   return (
-    <>
-      <Header title={user.firstName} />
-      <StyledContainer showsVerticalScrollIndicator={false}>
+    <StyledContainer>
+      <Header title={user.firstName} welcome />
+      <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <StyledSwiper
           horizontal
           pagingEnabled
@@ -71,8 +72,8 @@ const HomeConsumer: React.FC = () => {
           </StyledText>
           <CardList data={data_ongs} columns={2} />
         </StyledMainContain>
-      </StyledContainer>
-    </>
+      </StyledContainerScroll>
+    </StyledContainer>
   );
 };
 

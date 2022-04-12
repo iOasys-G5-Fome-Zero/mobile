@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { CheckBox } from 'react-native-elements';
+import { Form } from '@unform/mobile';
+import React, { useState, useRef } from 'react';
 
 // components
-import { Header, Button } from '../../../../components';
+import { Header, Button, Checkbox } from '../../../../components';
 import {
   StyledContainer,
   StyledTitle,
@@ -14,44 +14,35 @@ import {
 } from './styles';
 
 const BasketProducer: React.FC = () => {
-  // const user = useAppSelector(state => state.userReducer.user);
+  const formRef = useRef(null);
   const [checked, setChecked] = useState(false);
   const handleCheckBox = () => {
     setChecked(status => !status);
   };
-
+  const formHandle = data => {
+    console.log(data);
+  };
   const returnBasket = () => {
     return (
       <>
-        <StyledContainerCestas>
-          <StyledSaveCestas>
-            <CheckBox onPress={handleCheckBox} checkedColor='#00843F' size={35} {...{ checked }} />
-            <StyledSaveCestasTitle>Pequena</StyledSaveCestasTitle>
-            <StyledSaveCestasText>1 tempero, 2 legumes, 2 verduras , 3 frutas</StyledSaveCestasText>
-          </StyledSaveCestas>
-        </StyledContainerCestas>
-        <StyledContainerCestas>
-          <StyledSaveCestas>
-            <CheckBox onPress={handleCheckBox} checkedColor='#00843F' size={35} {...{ checked }} />
-            <StyledSaveCestasTitle>Média</StyledSaveCestasTitle>
-            <StyledSaveCestasText>
-              2 temperos, 3 legumes, 3 verduras e 3 frutas
-            </StyledSaveCestasText>
-          </StyledSaveCestas>
-        </StyledContainerCestas>
-        <StyledContainerCestas>
-          <StyledSaveCestas>
-            <CheckBox onPress={handleCheckBox} checkedColor='#00843F' size={35} {...{ checked }} />
-            <StyledSaveCestasTitle>Grande</StyledSaveCestasTitle>
-            <StyledSaveCestasText>
-              3 temperos, 4 legumes, 4 verduras e 4 frutas
-            </StyledSaveCestasText>
-          </StyledSaveCestas>
-        </StyledContainerCestas>
+        <Form ref={formRef} onSubmit={formHandle}>
+          <Checkbox
+            bigBox
+            name='small'
+            size={14}
+            options={['Pequena', 'Média', 'Grande']}
+            subOptions={[
+              '1 tempero, 2 legumes, 2 verduras , 3 frutas',
+              '2 temperos, 3 legumes, 3 verduras, 3 frutas e 1 processado',
+              '3 temperos, 4 legumes, 4 verduras, 4 frutas e 1 processado'
+            ]}
+          />
+        </Form>
+
         <Button
-          style={{ backgroundColor: '#00843F', alignSelf: 'center' }}
+          style={{ backgroundColor: '#00843F', alignSelf: 'center', marginTop: 10 }}
           size={14}
-          onPress={() => null}
+          onPress={() => formRef.current.submitForm()}
         >
           Confirmar Seleção
         </Button>
