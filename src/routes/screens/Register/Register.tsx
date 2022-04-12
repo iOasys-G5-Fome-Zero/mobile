@@ -41,8 +41,7 @@ const Register: React.FC = () => {
         userType: Yup.string().required('Obrigatório'),
         name: Yup.string().required('Obrigatório'),
         email: Yup.string().required('Obrigatório'),
-        password: Yup.string().required('Obrigatório'),
-        confirmPassword: Yup.string().required('Obrigatório')
+        password: Yup.string().required('Obrigatório')
       });
 
       await schemaRegiste.validate(data, {
