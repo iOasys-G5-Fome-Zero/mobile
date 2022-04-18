@@ -1,25 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import { TabActions, useNavigation } from '@react-navigation/native';
-import { handleError, getDefaulSize, getDefaultFrequency } from '../../../../helpers';
+import { handleError, getDefaulSize, getDefaultFrequency, prettyLog } from '../../../../helpers';
 import { api } from '../../../../services/api';
 
 // componets
 import { Header, Radio, Label, Button } from '../../../../components';
 
 // styled components
-import { StyledContainer, StyledTitle, StyledContainerScroll } from './styles';
+import { StyledContainer, StyledTitle, StyledContainerScroll, StyledLoading } from './styles';
 
 // interfaces
 import { IProducerBaskets } from '../../../../@types/interfaces/Basket';
 
 const MyBasketConsumerSignPlan: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
 
   const handlePlan = async (data: any) => {
+    setLoading(true);
+
     try {
       const schema = Yup.object().shape({
         frequency: Yup.string().required('Frequencia é obrigatório'),
@@ -30,6 +33,12 @@ const MyBasketConsumerSignPlan: React.FC = () => {
       formRef.current.setErrors({});
 
       const myBasket = await getBasket(data.frequency, data.size);
+
+      // assina o plano com a cesta
+      await singPlan({
+        basketID: myBasket.basket_id,
+        producerID: myBasket.user_id
+      });
 
       handleNavigate(myBasket);
     } catch (error) {
@@ -43,6 +52,8 @@ const MyBasketConsumerSignPlan: React.FC = () => {
         formRef.current.setErrors(errorMessages);
       }
     }
+
+    setLoading(false);
   };
 
   const handleNavigate = (myBasket: IProducerBaskets) => {
@@ -67,6 +78,19 @@ const MyBasketConsumerSignPlan: React.FC = () => {
       return basket;
     } catch (error) {
       handleError(error);
+    }
+  };
+
+  const singPlan = async ({ basketID, producerID }) => {
+    try {
+      await api.patch('/baskets/assign-basket-to-consumer', {
+        basketID,
+        producerID
+      });
+
+      prettyLog('assinou o plano');
+    } catch (error) {
+      prettyLog('erro ao assinar o plano');
     }
   };
 
@@ -117,7 +141,7 @@ const MyBasketConsumerSignPlan: React.FC = () => {
           size={14}
           onPress={() => formRef.current.submitForm()}
         >
-          Próximo
+          {loading ? <StyledLoading size='small' color='#fff' /> : 'Próximo'}
         </Button>
       </StyledContainerScroll>
     </StyledContainer>

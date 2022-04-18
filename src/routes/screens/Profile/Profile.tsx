@@ -3,32 +3,62 @@ import { Dimensions } from 'react-native';
 import { TabActions, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { resetGenericPassword } from 'react-native-keychain';
-import { MainStackParams } from '../../../Routes';
-import { useAppSelector } from '../../../../store/store';
+import { MainStackParams } from '../../Routes';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { setLogged } from '../../../store';
+import { BottomTabConsumerParams } from '../../tabs/ConsumerTabNavigator';
+import { BottomTabProducerParams } from '../../tabs/ProducerTabNavigator';
 
 // components
-import { Button, Header } from '../../../../components';
+import { Button, Header } from '../../../components';
 import { StyledContainer, StyledContainerScroll, StyledText } from './styles';
 
 // types
 type NavProps = NativeStackNavigationProp<MainStackParams, 'Login'>;
+type NavPropsConsumer = NativeStackNavigationProp<BottomTabConsumerParams, 'MyBasketConsumer'>;
+type NavPropsProducer = NativeStackNavigationProp<BottomTabProducerParams, 'FinancialProducer'>;
 
 const ProfileConsumer: React.FC = () => {
   const navigation = useNavigation<NavProps>();
+  const navigationProducer = useNavigation<NavPropsProducer>();
+  const navigationConsumer = useNavigation<NavPropsConsumer>();
   const user = useAppSelector(state => state.userReducer.user);
+  const dispatch = useAppDispatch();
+
   const { width } = Dimensions.get('window');
 
   const handleGoOut = async () => {
     await resetGenericPassword({ service: 'refreshToken' });
     await resetGenericPassword({ service: 'accessToken' });
 
+    dispatch(setLogged(false));
     navigation.navigate('Login');
   };
 
   const handleNavigate = () => {
-    const jumpToSignFood = TabActions.jumpTo('ProfileMessages');
+    const type = user.userType;
 
-    navigation.dispatch(jumpToSignFood);
+    if (type === 'consumer') {
+      const jumpToSignFood = TabActions.jumpTo('ProfileConsumerMessages');
+      navigation.dispatch(jumpToSignFood);
+    }
+
+    if (type === 'producer') {
+      const jumpToSignFood = TabActions.jumpTo('ProfileProducerMessages');
+      navigation.dispatch(jumpToSignFood);
+    }
+  };
+
+  const handleNavigatePlan = () => {
+    const type = user.userType;
+
+    if (type === 'consumer') {
+      navigationConsumer.navigate('MyBasketConsumer');
+    }
+
+    if (type === 'producer') {
+      navigationProducer.navigate('FinancialProducer');
+    }
   };
 
   return (
@@ -60,7 +90,7 @@ const ProfileConsumer: React.FC = () => {
           iconColor='#262626'
           iconSize={16}
           big
-          onPress={() => null}
+          onPress={() => handleNavigatePlan()}
         >
           Configurar plano
         </Button>

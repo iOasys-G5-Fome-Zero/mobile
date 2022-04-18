@@ -21,3 +21,5 @@ export const StyledTitle = styled.Text`
   text-align: center;
   margin-bottom: ${height * 0.02}px;
 `;
+
+export const StyledLoading = styled.ActivityIndicator``;

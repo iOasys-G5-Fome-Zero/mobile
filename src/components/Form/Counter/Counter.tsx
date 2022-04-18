@@ -25,6 +25,7 @@ interface IProps {
   image?: string;
   maxQuantity: number;
   justCounter?: boolean;
+  donation?: boolean;
 }
 
 const Counter: React.FC<IProps> = ({
@@ -33,7 +34,8 @@ const Counter: React.FC<IProps> = ({
   label = '',
   image = '',
   maxQuantity,
-  justCounter = false
+  justCounter = false,
+  donation = false
 }) => {
   const [counter, setCounter] = useState(justCounter ? 0 : maxQuantity);
 
@@ -44,10 +46,11 @@ const Counter: React.FC<IProps> = ({
       name: fieldName,
       ref: {},
       getValue: () => {
-        if (maxQuantity) {
-          return counter;
+        if (donation) {
+          return maxQuantity - counter;
         }
-        return maxQuantity - counter;
+
+        return counter;
       },
       setValue: (ref, value) => setCounter(value)
     });

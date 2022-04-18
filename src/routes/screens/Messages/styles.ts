@@ -6,7 +6,7 @@ import {
   StyledContainer as Container,
   StyledContainerScroll as Scroll,
   StyledText as Text
-} from '../HomeConsumer/styles';
+} from '../Consumer/HomeConsumer/styles';
 
 const { width, height } = Dimensions.get('window');
 

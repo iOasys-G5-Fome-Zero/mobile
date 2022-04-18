@@ -5,7 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FormHandles, SubmitHandler } from '@unform/core/typings/types';
 import { setGenericPassword, getGenericPassword } from 'react-native-keychain';
 import { useAppDispatch } from '../../../store/store';
-import { setUser, setWeb } from '../../../store';
+import { setUser, setWeb, setLogged } from '../../../store';
 import { MainStackParams } from '../../Routes';
 import { api } from '../../../services/api';
 
@@ -95,6 +95,8 @@ const Login: React.FC = () => {
         userType: user.user_type
       })
     );
+
+    dispatch(setLogged(true));
   };
 
   const setToken = async (data: ILoginResponse, checked: boolean) => {
@@ -161,11 +163,6 @@ const Login: React.FC = () => {
 
         <Checkbox name='checked' size={14} options={['Lembrar minha senha']} />
       </Form>
-
-      {/* <StyledSaveLogin>
-        <CheckBox onPress={handleCheckBox} {...{ checked }} />
-        <StyledSaveLoginText>Lembrar minha senha</StyledSaveLoginText>
-      </StyledSaveLogin> */}
 
       <Button
         style={{ marginBottom: 60, marginTop: 20 }}

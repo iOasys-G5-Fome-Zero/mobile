@@ -23,7 +23,7 @@ export const StyledTitle = styled.Text`
 `;
 
 export const StyledContainerForgotPassword = styled.View`
-  width: 85%;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: ${height * 0.025}px;

@@ -33,3 +33,5 @@ export const StyledSaveLoginText = styled.Text`
   color: ${({ theme }) => theme.colors.black};
   margin-left: ${width * -0.04}px;
 `;
+
+export const StyledLoading = styled.ActivityIndicator``;

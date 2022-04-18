@@ -7,7 +7,7 @@ interface IProps {
   size: number;
 }
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export const Container = styled.View`
   margin-bottom: 10px;
@@ -26,7 +26,7 @@ export const CheckBox = styled.View`
   height: ${width * 0.05}px;
   align-items: center;
   justify-content: center;
-  border: 1.2px solid ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: ${(width * 0.02) / 2}px;
   margin: 3px 8px 0 0;
 `;
@@ -35,6 +35,14 @@ export const Label = styled.Text<IProps>`
   font-size: ${({ size }) => RFValue(size)}px;
   justify-content: center;
   align-items: center;
+`;
+
+export const ContainerBigCheckbox = styled.View`
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 5px;
+  padding: 16px;
+  margin-bottom: ${height * 0.025}px;
 `;
 
 export const ErrorMessage = styled.Text`

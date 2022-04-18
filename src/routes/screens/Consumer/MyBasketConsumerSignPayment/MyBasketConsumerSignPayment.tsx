@@ -12,7 +12,7 @@ import { api } from '../../../../services/api';
 import { IProducerBaskets } from '../../../../@types/interfaces/Basket';
 import { IDelivery } from '../../../../@types/interfaces/Delivery';
 import { IMyRemovedFood } from '../../../../@types/interfaces/Food';
-import { BottomTabConsumerStackParams } from '../../../Tabs/ConsumerTabNavigator';
+import { BottomTabConsumerParams } from '../../../tabs/ConsumerTabNavigator';
 
 // icons
 import BasketVegetableIcon from '../../../../assets/icons/vegetable-basket.svg';
@@ -33,7 +33,7 @@ import {
 
 // interfaces
 
-type NavProps = NativeStackNavigationProp<BottomTabConsumerStackParams, 'HomeConsumer'>;
+type NavProps = NativeStackNavigationProp<BottomTabConsumerParams, 'HomeConsumer'>;
 
 interface IProps {
   route: RouteProp<
@@ -65,12 +65,6 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
 
       await schema.validate(data, { abortEarly: false });
       formRef.current.setErrors({});
-
-      // assina o plano com a cesta
-      await singPlan({
-        basketID: route.params.myBasket.basket_id,
-        producerID: route.params.myBasket.user_id
-      });
 
       // remove as comidas da cesta para doação
       await setRemovedFood();
@@ -104,19 +98,6 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
     Clipboard.setString(pixProducer);
   };
 
-  const singPlan = async ({ basketID, producerID }) => {
-    try {
-      await api.patch('/baskets/assign-basket-to-consumer', {
-        basketID,
-        producerID
-      });
-
-      prettyLog('assinou o plano');
-    } catch (error) {
-      prettyLog('erro ao assinar o plano');
-    }
-  };
-
   const setRemovedFood = async () => {
     try {
       await api.delete('/consumers/basket/delete-removed-foods');
@@ -124,6 +105,8 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
 
       prettyLog('removeu as comidas da cesta');
     } catch (error) {
+      prettyLog(error.response);
+
       // preciso de ajuda
       prettyLog('erro ao remover as comidas');
     }
@@ -142,6 +125,8 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
 
       prettyLog('enviou comprovante');
     } catch (error) {
+      prettyLog(error.response);
+
       // preciso de ajuda
       prettyLog('erro ao enviar o comprovante');
     }
@@ -228,7 +213,7 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
             </StyledText>
             <StyledRow between>
               <StyledText size={14}>
-                {`Cesta ${translateBasket(route.params?.myBasket.basket_size)} ${
+                {`Cesta ${translateBasket.toPortuguese(route.params?.myBasket.basket_size)} ${
                   route.params?.myBasket.basket_days_per_deliver === '15'
                     ? '(quinzenal)'
                     : '(semanal)'
