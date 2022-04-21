@@ -156,7 +156,9 @@ Após o término da instalação das dependências necessárias, precisaremos ro
 ```sh
 yarn run android
 ```
-#
+# Licença
+## Esse aplicativo foi desenvolvido para o Camping da iOasys, ficaremos muito felizes caso queira contribuir com nosso código. 
+©PowerHungers - G5
 
 
 
