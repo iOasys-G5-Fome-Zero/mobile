@@ -6,8 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { api } from '../../../services/api';
 import { useAppDispatch } from '../../../store/store';
-import { setUser, setLogged } from '../../../store';
-import { handleError, handleMessage } from '../../../helpers';
+import { setUser } from '../../../store';
+import { handleError, handleMessage, login, prettyLog } from '../../../helpers';
 import { MainStackParams } from '../../Routes';
 import { IUserResponse } from '../../../@types/interfaces/User';
 import { IRegisterRequest, IRegisterResponse } from '../../../@types/interfaces/Register';
@@ -18,17 +18,13 @@ import { StyledContainer, StyledText, StyledLoading } from './styles';
 
 // types
 
-type NavProps = NativeStackNavigationProp<MainStackParams, 'Onboarding'>;
+type NavProps = NativeStackNavigationProp<MainStackParams, 'ConfirmRegister'>;
 
 const Register: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation<NavProps>();
   const dispatch = useAppDispatch();
-
-  const handleNavigation = () => {
-    navigation.navigate('Onboarding');
-  };
 
   const handleLogin: SubmitHandler<IRegisterRequest> = async data => {
     setLoading(true);
@@ -48,7 +44,7 @@ const Register: React.FC = () => {
 
       formRef.current.setErrors({});
 
-      await setRegister(data);
+      await handleRegister(data);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessages = {};
@@ -64,18 +60,15 @@ const Register: React.FC = () => {
     setLoading(false);
   };
 
-  const setRegister = async (formData: IRegisterRequest) => {
+  const handleRegister = async (formData: IRegisterRequest) => {
     try {
       let lastName: string;
-
       formData.name.split(' ').forEach((item: string, index: number) => {
         if (index > 0) {
           lastName = `${lastName !== undefined ? lastName : ''}${index === 1 ? '' : ' '}${item}`;
         }
       });
-
       const firstName = formData.name.split(' ')[0];
-
       const phoneString = formData.phone.replace(/[^0-9]/g, '');
 
       await api.post<IRegisterResponse>('/users/new-user/', {
@@ -86,40 +79,31 @@ const Register: React.FC = () => {
         password: formData.password
       });
 
-      const { data: dataUser } = await api.post(
-        '/auth/login',
-        {
-          phoneOrEmail: phoneString,
-          password: formData.password
-        },
-        { timeout: 10000 }
+      const user = await login({ phoneOrEmail: phoneString, password: formData.password });
+
+      dispatch(
+        setUser({
+          id: user.id,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          email: user.email,
+          phone: user.phone,
+          userType: user.user_type
+        })
       );
 
-      handleSaveUser(dataUser);
-
-      handleNavigation();
+      navigation.navigate('ConfirmRegister');
     } catch (error) {
+      if (error.response.date === 503) {
+        handleMessage('Não foi possível conectar com o servidor. Tente novamente mais tarde.');
+      }
+
       if (error.response.status === 409) {
         handleMessage('Número de telefone já cadastrado');
       } else {
         handleError(error);
       }
     }
-  };
-
-  const handleSaveUser = (user: IUserResponse) => {
-    dispatch(
-      setUser({
-        id: user.id,
-        firstName: user.first_name,
-        lastName: user.last_name,
-        email: user.email,
-        phone: user.phone,
-        userType: user.user_type
-      })
-    );
-
-    dispatch(setLogged(true));
   };
 
   return (

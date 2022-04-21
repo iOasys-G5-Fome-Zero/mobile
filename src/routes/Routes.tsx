@@ -35,6 +35,8 @@ const Main = createNativeStackNavigator<MainStackParams>();
 
 const Routes: React.FC = () => {
   const goWeb = useAppSelector(state => state.webReducer.go);
+  const user = useAppSelector(state => state.userReducer.user);
+  const newUser = useAppSelector(state => state.userReducer.newUser);
   const logged = useAppSelector(state => state.userReducer.logged);
 
   useEffect(() => {
@@ -47,6 +49,38 @@ const Routes: React.FC = () => {
     }
   });
 
+  const returnMainSatck = () => {
+    if (!logged) {
+      return (
+        <>
+          <Main.Screen name='Splash' component={Splash} />
+          <Main.Screen name='Login' component={Login} />
+          <Main.Screen name='Register' component={Register} />
+          <Main.Screen name='WebView' component={WebView} />
+          <Main.Screen name='ConfirmRegister' component={ConfirmRegister} />
+          <Main.Screen name='Onboarding' component={Onboarding} />
+        </>
+      );
+    }
+
+    if (logged && user.userType === 'producer') {
+      return (
+        <>
+          <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
+          <Main.Screen name='BasketProducer' component={BasketProducer} />
+          <Main.Screen name='WebView' component={WebView} />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
+        <Main.Screen name='WebView' component={WebView} />
+      </>
+    );
+  };
+
   return (
     <NavigationContainer>
       <Main.Navigator
@@ -56,24 +90,7 @@ const Routes: React.FC = () => {
           contentStyle: { backgroundColor: '#FFFFFF' }
         }}
       >
-        {!logged ? (
-          <>
-            <Main.Screen name='Splash' component={Splash} />
-            <Main.Screen name='Login' component={Login} />
-            <Main.Screen name='Register' component={Register} />
-            <Main.Group screenOptions={{ presentation: 'modal' }}>
-              <Main.Screen name='ConfirmRegister' component={ConfirmRegister} />
-            </Main.Group>
-          </>
-        ) : (
-          <>
-            <Main.Screen name='Onboarding' component={Onboarding} />
-            <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
-            <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
-            <Main.Screen name='BasketProducer' component={BasketProducer} />
-            <Main.Screen name='WebView' component={WebView} />
-          </>
-        )}
+        {returnMainSatck()}
       </Main.Navigator>
     </NavigationContainer>
   );

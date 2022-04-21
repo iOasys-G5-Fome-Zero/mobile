@@ -56,12 +56,7 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
 
     try {
       const schema = Yup.object().shape({
-        delivery: Yup.string().required('Selecione uma opção de entrega'),
-        file: Yup.object()
-          .shape({
-            name: Yup.string().required()
-          })
-          .required('Obrigatório')
+        delivery: Yup.string().required('Selecione uma opção de entrega')
       });
 
       await schema.validate(data, { abortEarly: false });
@@ -98,12 +93,12 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
 
   const setRemovedFood = async () => {
     try {
-      await api.delete('/consumers/basket/delete-removed-foods');
-      await api.post(`/consumers/basket/set-removed-foods`, route.params.myRemovedFoodsBasket);
+      const removedFoods = route.params.myRemovedFoodsBasket.filter(food => food.quantity);
 
-      prettyLog('removeu as comidas da cesta');
+      await api.delete('/consumers/basket/delete-removed-foods');
+      await api.post(`/consumers/basket/set-removed-foods`, removedFoods);
     } catch (error) {
-      // prettyLog(error.response);
+      prettyLog(error.response.data);
 
       prettyLog('erro ao remover as comidas');
     }

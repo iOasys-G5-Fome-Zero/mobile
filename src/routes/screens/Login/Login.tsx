@@ -66,7 +66,6 @@ const Login: React.FC = () => {
       );
 
       setToken(dataUser, !!data.checked);
-      handleNavigation(dataUser.user_type);
       handleSaveUser(dataUser);
       setError(false);
     } catch (err) {
@@ -74,16 +73,6 @@ const Login: React.FC = () => {
     }
 
     setLoadingLogin(false);
-  };
-
-  const handleNavigation = (userType: string) => {
-    if (userType === 'consumer') {
-      navigation.navigate('ConsumerTabNavigator');
-    }
-
-    if (userType === 'producer') {
-      navigation.navigate('ProducerTabNavigator');
-    }
   };
 
   const handleSaveUser = (user: IUserResponse) => {
@@ -130,7 +119,6 @@ const Login: React.FC = () => {
       });
 
       handleSaveUser(data);
-      handleNavigation(data.user_type);
     }
   };
 

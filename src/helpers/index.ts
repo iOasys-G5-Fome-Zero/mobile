@@ -6,3 +6,4 @@ export { default as getRandonNumber } from './getRandonNumber';
 export { default as translateFood } from './translateFoods';
 export { default as translateBasket } from './traslateBasket';
 export { default as getTotalItemsBasket } from './getTotalItemsBasket';
+export { default as login } from './login';

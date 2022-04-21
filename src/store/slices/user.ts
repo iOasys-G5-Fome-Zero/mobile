@@ -11,7 +11,8 @@ const UserSlice = createSlice({
       avatar: '',
       userType: ''
     },
-    logged: false
+    logged: false,
+    newUser: false
   },
   reducers: {
     setUser: (state, { payload }) => {

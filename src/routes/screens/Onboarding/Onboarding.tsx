@@ -1,9 +1,6 @@
 import React from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MainStackParams } from '../../Routes';
-import { useAppSelector } from '../../../store/store';
+import { useAppDispatch } from '../../../store/store';
 
 // mocks
 import { data_onbording } from '../../../services/mocks';
@@ -18,15 +15,10 @@ import {
   StyledButtonNext,
   StyledContainerTextContain
 } from './styles';
-
-type NavProps = NativeStackNavigationProp<
-  MainStackParams,
-  'ConsumerTabNavigator' | 'ProducerTabNavigator'
->;
+import { setLogged } from '../../../store';
 
 const Onboarding = () => {
-  const navigation = useNavigation<NavProps>();
-  const user = useAppSelector(state => state.userReducer.user);
+  const dispatch = useAppDispatch();
 
   const renderItem = ({ item }) => {
     return (
@@ -54,12 +46,7 @@ const Onboarding = () => {
     return (
       <StyledButton
         onPress={() => {
-          if (user.userType === 'consumer') {
-            navigation.navigate('ConsumerTabNavigator');
-          }
-          if (user.userType === 'producer') {
-            navigation.navigate('ProducerTabNavigator');
-          }
+          dispatch(setLogged(true));
         }}
       >
         <StyledButtonText>Finalizar</StyledButtonText>
