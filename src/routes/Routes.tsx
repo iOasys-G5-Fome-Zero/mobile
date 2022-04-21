@@ -50,7 +50,7 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='Splash'
+        initialRouteName='Onboarding'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }
@@ -61,10 +61,10 @@ const Routes: React.FC = () => {
             <Main.Screen name='Splash' component={Splash} />
             <Main.Screen name='Login' component={Login} />
             <Main.Screen name='Register' component={Register} />
+            <Main.Screen name='Onboarding' component={Onboarding} />
           </>
         ) : (
           <>
-            <Main.Screen name='Onboarding' component={Onboarding} />
             <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
             <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
             <Main.Screen name='BasketProducer' component={BasketProducer} />
