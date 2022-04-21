@@ -57,12 +57,6 @@ const HomeConsumer: React.FC = () => {
           {data_presentation.map(({ image }, index) => returnCardSwiper({ image, index }))}
         </StyledSwiper>
         <StyledMainContain>
-          <StyledText size={16} bold style={{ marginBottom: 30 }}>
-            Conheça nossos produtos
-          </StyledText>
-          <CardList data={data_our_services} columns={3} />
-        </StyledMainContain>
-        <StyledMainContain>
           <StyledText size={16} bold style={{ marginBottom: 10 }}>
             Ajude no combate a fome
           </StyledText>

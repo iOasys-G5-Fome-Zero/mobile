@@ -50,13 +50,13 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='Onboarding'
+        initialRouteName='ConsumerTabNavigator'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }
         }}
       >
-        {!logged ? (
+        {logged ? (
           <>
             <Main.Screen name='Splash' component={Splash} />
             <Main.Screen name='Login' component={Login} />
