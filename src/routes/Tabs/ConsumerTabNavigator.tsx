@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 // icons
 import HomeIcon from '../../assets/icons/home-icon.svg';
@@ -9,36 +8,19 @@ import DonationsIcon from '../../assets/icons/donations-icon.svg';
 import ProfileIcon from '../../assets/icons/profile-icon.svg';
 
 // screens
-import {
-  HomeConsumer,
-  MyBasketConsumerSignPlan,
-  DonationsConsumer,
-  ProfileConsumer,
-  ProfileMessages,
-  MyBasketConsumerSignFood,
-  MyBasketConsumerSignPayment
-} from '../screens/Consumer';
+import { HomeConsumer, DonationsConsumer } from '../screens/Consumer';
 
-export type BottomTabConsumerStackParams = {
+// top tabs
+import { TopTabMyBasketConsumer, TopTabProfileConsumer } from './topTabs';
+
+export type BottomTabConsumerParams = {
   HomeConsumer: undefined;
   MyBasketConsumer: undefined;
   DonationsConsumer: undefined;
   ProfileConsumer: undefined;
 };
 
-export type TopTabMyBasketConsumerStackParams = {
-  MyBasketConsumerSignPlan: undefined;
-  MyBasketConsumerSignFood: undefined;
-  MyBasketConsumerSignPayment: undefined;
-};
-
-export type TopTabProfileConsumerStackParams = {
-  ProfileConsumer: undefined;
-  ProfileMessages: undefined;
-};
-
 const BottomTab = createMaterialBottomTabNavigator();
-const TopTab = createMaterialTopTabNavigator();
 
 const retunrIconTab = ({ icon, focused }) => {
   switch (icon) {
@@ -52,37 +34,6 @@ const retunrIconTab = ({ icon, focused }) => {
       return <ProfileIcon fill={focused ? '#00A857' : '#3A3A3A'} />;
     default:
   }
-};
-
-const ReturnTopTabMyBasketConsumer = () => {
-  return (
-    <TopTab.Navigator
-      initialRouteName='MyBasketConsumerSignPlan'
-      screenOptions={{
-        swipeEnabled: false,
-        tabBarStyle: { display: 'none' }
-      }}
-    >
-      <TopTab.Screen name='MyBasketConsumerSignPlan' component={MyBasketConsumerSignPlan} />
-      <TopTab.Screen name='MyBasketConsumerSignFood' component={MyBasketConsumerSignFood} />
-      <TopTab.Screen name='MyBasketConsumerSignPayment' component={MyBasketConsumerSignPayment} />
-    </TopTab.Navigator>
-  );
-};
-
-const ReturnTopTabProfileConsumer = () => {
-  return (
-    <TopTab.Navigator
-      initialRouteName='ProfileConsumerHome'
-      screenOptions={{
-        swipeEnabled: false,
-        tabBarStyle: { display: 'none' }
-      }}
-    >
-      <TopTab.Screen name='ProfileConsumerHome' component={ProfileConsumer} />
-      <TopTab.Screen name='ProfileMessages' component={ProfileMessages} />
-    </TopTab.Navigator>
-  );
 };
 
 const ConsumerTabNavigator: React.FC = () => {
@@ -107,7 +58,7 @@ const ConsumerTabNavigator: React.FC = () => {
           tabBarLabel: 'Minha cesta',
           tabBarIcon: ({ focused }) => retunrIconTab({ icon: 'basket', focused })
         }}
-        component={ReturnTopTabMyBasketConsumer}
+        component={TopTabMyBasketConsumer}
       />
       <BottomTab.Screen
         name='DonationsConsumer'
@@ -123,7 +74,7 @@ const ConsumerTabNavigator: React.FC = () => {
           tabBarLabel: 'Perfil',
           tabBarIcon: ({ focused }) => retunrIconTab({ icon: 'profile', focused })
         }}
-        component={ReturnTopTabProfileConsumer}
+        component={TopTabProfileConsumer}
       />
     </BottomTab.Navigator>
   );

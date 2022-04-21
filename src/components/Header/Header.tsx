@@ -1,10 +1,14 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, TabActions } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppSelector } from '../../store/store';
+import { BottomTabConsumerParams } from '../../routes/tabs/ConsumerTabNavigator';
+import { BottomTabProducerParams } from '../../routes/tabs/ProducerTabNavigator';
 
 // icons
 import PenIcon from '../../assets/icons/pen-icon.svg';
+import MessageIcon from '../../assets/icons/message-icon.svg';
 
 // components
 import {
@@ -13,7 +17,8 @@ import {
   StyledRow,
   StyledHeaderProfile,
   StyledDefaultPhoto,
-  StyledButtonEditProfile
+  StyledButtonEditProfile,
+  StyledBaseButton
 } from './styled';
 
 // types
@@ -24,17 +29,46 @@ interface IHeaderProps {
   size?: number;
   profile?: boolean;
   nav?: any;
+  message?: boolean;
 }
+
+type NavBottomTabProducerProps = NativeStackNavigationProp<
+  BottomTabProducerParams,
+  'ProfileProducer'
+>;
+type NavBottomTabConsumerProps = NativeStackNavigationProp<
+  BottomTabConsumerParams,
+  'ProfileConsumer'
+>;
 
 const Header: React.FC<IHeaderProps> = ({
   title,
   welcome = false,
   size = 21,
   nav = null,
-  profile = false
+  profile = false,
+  message = false
 }) => {
   const navigation = useNavigation();
+  const navigationBottomTabProducer = useNavigation<NavBottomTabProducerProps>();
+  const navigationBottomTabConsumer = useNavigation<NavBottomTabConsumerProps>();
   const user = useAppSelector(state => state.userReducer.user);
+
+  const handleNavigationMessage = () => {
+    const type = user.userType;
+
+    if (type === 'consumer') {
+      navigationBottomTabConsumer.navigate('ProfileConsumer');
+      const jumpToSignFood = TabActions.jumpTo('ProfileConsumerMessages');
+      navigation.dispatch(jumpToSignFood);
+    }
+
+    if (type === 'producer') {
+      navigationBottomTabProducer.navigate('ProfileProducer');
+      const jumpToSignFood = TabActions.jumpTo('ProfileProducerMessages');
+      navigation.dispatch(jumpToSignFood);
+    }
+  };
 
   return (
     <>
@@ -60,14 +94,11 @@ const Header: React.FC<IHeaderProps> = ({
             {welcome ? `Olá ${title}!` : title}
           </StyledText>
         </StyledRow>
-        <Icon
-          type='feather'
-          name='message-circle'
-          size={24}
-          color='#262626'
-          onPress={() => null}
-          tvParallaxProperties={undefined}
-        />
+        {message && (
+          <StyledBaseButton onPress={() => handleNavigationMessage()}>
+            <MessageIcon />
+          </StyledBaseButton>
+        )}
       </StyledContainer>
       {profile && (
         <>

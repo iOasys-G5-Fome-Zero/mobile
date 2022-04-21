@@ -10,7 +10,8 @@ import {
   StyledBorderCheckBox,
   StyledCheckBox,
   Label,
-  StyledContainerCheck
+  StyledContainerCheck,
+  StyledLine
 } from './styles';
 
 // types
@@ -20,6 +21,7 @@ interface IProps {
   size?: number;
   containerStyle?: StyleProp<ViewStyle>;
   descriptions?: string[];
+  backLine?: boolean;
 }
 
 const Radio: React.FC<IProps> = ({
@@ -27,7 +29,8 @@ const Radio: React.FC<IProps> = ({
   name,
   size = 18,
   containerStyle = {},
-  descriptions = []
+  descriptions = [],
+  backLine = false
 }) => {
   const checkRefs = useRef([]);
 
@@ -118,7 +121,22 @@ const Radio: React.FC<IProps> = ({
     );
   };
 
-  return <>{options.map((item, index) => renderItem({ item, index }))}</>;
+  return (
+    <>
+      {options.map((item, index) => {
+        if (backLine) {
+          return (
+            <>
+              {renderItem({ item, index })}
+              <StyledLine />
+            </>
+          );
+        }
+
+        return renderItem({ item, index });
+      })}
+    </>
+  );
 };
 
 export default Radio;

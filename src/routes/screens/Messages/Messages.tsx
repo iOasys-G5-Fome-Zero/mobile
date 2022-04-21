@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MainStackParams } from '../../../Routes';
+import { MainStackParams } from '../../Routes';
 
 // components
-import { Header } from '../../../../components';
+import { Header } from '../../../components';
 import {
   StyledContainer,
   StyledContainerScroll,

@@ -4,8 +4,15 @@ import { useField } from '@unform/core';
 import { Icon } from 'react-native-elements';
 
 // components
-import { color } from 'react-native-reanimated';
-import { CheckBox, Label, OptionButton, ErrorMessage, Container, ContainerOptions } from './styles';
+import {
+  CheckBox,
+  Label,
+  OptionButton,
+  ErrorMessage,
+  Container,
+  ContainerOptions,
+  ContainerBigCheckbox
+} from './styles';
 
 // types
 interface IProps {
@@ -134,7 +141,6 @@ const Checkbox: React.FC<IProps> = ({
 
   const returnOptions = (item: string, index: number) => (
     <ContainerOptions key={index} style={{ marginRight: 10 }}>
-      {index === 0 && error && <ErrorMessage>Selecione ao menos 1 item</ErrorMessage>}
       <OptionButton onPress={() => handleCheck(index, item)}>
         <CheckBox
           ref={ref => {
@@ -152,14 +158,14 @@ const Checkbox: React.FC<IProps> = ({
         <View
           style={{
             flexDirection: 'column',
-            marginLeft: 10,
-            height: 45,
-            marginTop: 10,
+            marginLeft: subOptions.length ? 10 : 5,
+            height: subOptions.length ? 45 : 'auto',
+            marginTop: subOptions.length ? 10 : 0,
             justifyContent: 'space-between'
           }}
         >
           <Label size={size}>{item}</Label>
-          {subOptions[index] && <Label size={size - 2}>{subOptions[index]}</Label>}
+          {subOptions.length ? <Label size={size - 2}>{subOptions[index]}</Label> : null}
         </View>
       </OptionButton>
     </ContainerOptions>
@@ -170,21 +176,18 @@ const Checkbox: React.FC<IProps> = ({
       {options.map((item, index) => {
         if (bigBox) {
           return (
-            <View
-              style={{
-                borderWidth: 1,
-                borderColor: '#00843F',
-                marginHorizontal: 20,
-                marginVertical: 14,
-                padding: 16
-              }}
-            >
-              {returnOptions(item, index)}
-            </View>
+            <>
+              {index === 0 && error && <ErrorMessage>Selecione ao menos 1 item</ErrorMessage>}
+              <ContainerBigCheckbox>{returnOptions(item, index)}</ContainerBigCheckbox>
+            </>
           );
         }
-        return returnOptions(item, index);
-
+        return (
+          <>
+            {index === 0 && error && <ErrorMessage>{error}</ErrorMessage>}
+            {returnOptions(item, index)}
+          </>
+        );
       })}
     </Container>
   );

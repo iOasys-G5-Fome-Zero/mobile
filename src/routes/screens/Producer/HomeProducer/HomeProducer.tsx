@@ -3,20 +3,21 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppSelector } from '../../../../store/store';
 import { MainStackParams } from '../../../Routes';
-import { TabProducerStackParams } from '../../../Tabs/ProducerTabNavigator';
+import { BottomTabProducerParams } from '../../../tabs/ProducerTabNavigator';
 
 // components
 import { Header, Button } from '../../../../components';
 import {
   StyledContainer,
+  StyledContainerScroll,
   StyledTitle,
   StyledContainerCestas,
   StyledText,
-  StyledButtonNext,
+  StyledBigButton,
   StyledButtonText
 } from './styles';
 
-type TabNavProps = NativeStackNavigationProp<TabProducerStackParams, 'FinancialProducer'>;
+type TabNavProps = NativeStackNavigationProp<BottomTabProducerParams, 'FinancialProducer'>;
 type StackNavProps = NativeStackNavigationProp<MainStackParams, 'BasketProducer'>;
 
 const HomeProducer: React.FC = () => {
@@ -27,11 +28,11 @@ const HomeProducer: React.FC = () => {
   const returnFinancas = () => {
     return (
       <StyledContainerCestas>
-        <StyledText>
+        <StyledText textAlign='center'>
           Configure quais os tipos e tamanhos de cesta de alimentos você deseja fornecer.
         </StyledText>
         <Button
-          style={{ backgroundColor: '#00843F', alignSelf: 'center' }}
+          style={{ backgroundColor: '#00843F', alignSelf: 'center', marginBottom: 0 }}
           size={14}
           onPress={() => stackNavigation.navigate('BasketProducer')}
         >
@@ -41,9 +42,9 @@ const HomeProducer: React.FC = () => {
     );
   };
   return (
-    <>
-      <Header title={user.firstName} />
-      <StyledContainer>
+    <StyledContainer>
+      <Header title={user.firstName} welcome message />
+      <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <StyledTitle size={16} bold>
           Minhas cestas
         </StyledTitle>
@@ -51,14 +52,20 @@ const HomeProducer: React.FC = () => {
         <StyledTitle size={16} bold>
           Minhas finanças
         </StyledTitle>
-        <StyledButtonNext onPress={() => tabNavigation.navigate('FinancialProducer')}>
+        <StyledBigButton
+          activeOpacity={0.7}
+          onPress={() => tabNavigation.navigate('FinancialProducer')}
+        >
           <StyledButtonText>Veja agora os seus rendimentos</StyledButtonText>
-        </StyledButtonNext>
-        <StyledButtonNext>
+        </StyledBigButton>
+        <StyledBigButton
+          activeOpacity={0.7}
+          onPress={() => tabNavigation.navigate('FinancialProducer')}
+        >
           <StyledButtonText>Cadastre aqui a sua chave Pix</StyledButtonText>
-        </StyledButtonNext>
-      </StyledContainer>
-    </>
+        </StyledBigButton>
+      </StyledContainerScroll>
+    </StyledContainer>
   );
 };
 export default HomeProducer;

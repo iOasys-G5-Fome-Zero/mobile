@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { Dimensions } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 interface PropsLabel {
   size: number;
@@ -23,7 +23,7 @@ export const ErrorMessage = styled.Text`
 `;
 
 export const CheckButton = styled.TouchableOpacity`
-  margin-bottom: 10px;
+  margin-bottom: ${height * 0.01}px;
 `;
 
 export const StyledBorderCheckBox = styled.TouchableOpacity`
@@ -47,4 +47,11 @@ export const Label = styled.Text<PropsLabel>`
   font-family: ${({ theme }) => theme.fonts.HEADLINE};
   font-size: ${({ size }) => RFValue(size)}px;
   margin-top: 5px;
+`;
+
+export const StyledLine = styled.View`
+  width: 100%;
+  height: 1px;
+  background-color: ${({ theme }) => theme.colors.gray};
+  margin-bottom: ${height * 0.01}px;
 `;

@@ -4,7 +4,7 @@ import {
   StyledContainer as Container,
   StyledContainerScroll as Scroll,
   StyledText as Text
-} from '../HomeConsumer/styles';
+} from '../Consumer/HomeConsumer/styles';
 
 export const StyledContainer = styled(Container)``;
 export const StyledContainerScroll = styled(Scroll)``;

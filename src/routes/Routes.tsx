@@ -11,14 +11,16 @@ import Register from './screens/Register/Register';
 import Onboarding from './screens/Onboarding/Onboarding';
 import BasketProducer from './screens/Producer/BasketProducer/BasketProducer';
 import Chat from './screens/Chat/Chat';
+import Splash from './screens/Splash/Splash';
 
-import ProducerTabNavigator from './Tabs/ProducerTabNavigator';
-import ConsumerTabNavigator from './Tabs/ConsumerTabNavigator';
+import ProducerTabNavigator from './tabs/ProducerTabNavigator';
+import ConsumerTabNavigator from './tabs/ConsumerTabNavigator';
 
 import { WebView } from '../components';
 
 // types
 export type MainStackParams = {
+  Splash: undefined;
   Login: undefined;
   Register: undefined;
   ProducerTabNavigator: undefined;
@@ -33,6 +35,7 @@ const Main = createNativeStackNavigator<MainStackParams>();
 
 const Routes: React.FC = () => {
   const goWeb = useAppSelector(state => state.webReducer.go);
+  const logged = useAppSelector(state => state.userReducer.logged);
 
   useEffect(() => {
     if (goWeb) {
@@ -44,25 +47,31 @@ const Routes: React.FC = () => {
     }
   });
 
-  // if (goWeb) return <WebView />;
-
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='BasketProducer'
+        initialRouteName='Splash'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }
         }}
       >
-        <Main.Screen name='Login' component={Login} />
-        <Main.Screen name='Register' component={Register} />
-        <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
-        <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
-        <Main.Screen name='Onboarding' component={Onboarding} />
-        <Main.Screen name='BasketProducer' component={BasketProducer} />
-        <Main.Screen name='WebView' component={WebView} />
-        <Main.Screen name='Chat' component={Chat} />
+        {!logged ? (
+          <>
+            <Main.Screen name='Splash' component={Splash} />
+            <Main.Screen name='Login' component={Login} />
+            <Main.Screen name='Register' component={Register} />
+          </>
+        ) : (
+          <>
+            <Main.Screen name='Onboarding' component={Onboarding} />
+            <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
+            <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
+            <Main.Screen name='BasketProducer' component={BasketProducer} />
+            <Main.Screen name='WebView' component={WebView} />
+            <Main.Screen name='Chat' component={Chat} />
+          </>
+        )}
       </Main.Navigator>
     </NavigationContainer>
   );

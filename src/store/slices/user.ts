@@ -10,15 +10,20 @@ const UserSlice = createSlice({
       email: '',
       avatar: '',
       userType: ''
-    }
+    },
+    logged: false
   },
   reducers: {
     setUser: (state, { payload }) => {
       state.user = payload;
+    },
+
+    setLogged: (state, { payload }) => {
+      state.logged = payload;
     }
   }
 });
 
-export const { setUser } = UserSlice.actions;
+export const { setUser, setLogged } = UserSlice.actions;
 
 export default UserSlice.reducer;

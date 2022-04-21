@@ -18,14 +18,16 @@ const useGetPixProducer = () => {
   const getPixProducer = async () => {
     const basketProducerInfo = await getBasketProducerInfo();
 
-    if (basketProducerInfo.randomPix) {
-      setPixProducer(basketProducerInfo.randomPix);
-    } else if (basketProducerInfo.phonePix) {
-      setPixProducer(basketProducerInfo.phonePix);
-    } else if (basketProducerInfo.emailPix) {
-      setPixProducer(basketProducerInfo.emailPix);
-    } else if (basketProducerInfo.cpfPix) {
-      setPixProducer(basketProducerInfo.cpfPix);
+    if (basketProducerInfo) {
+      if (basketProducerInfo.randomPix) {
+        setPixProducer(basketProducerInfo.randomPix);
+      } else if (basketProducerInfo.phonePix) {
+        setPixProducer(basketProducerInfo.phonePix);
+      } else if (basketProducerInfo.emailPix) {
+        setPixProducer(basketProducerInfo.emailPix);
+      } else if (basketProducerInfo.cpfPix) {
+        setPixProducer(basketProducerInfo.cpfPix);
+      }
     } else {
       setPixProducer('Não possui nenhuma chave pix cadastrada');
     }
@@ -34,7 +36,7 @@ const useGetPixProducer = () => {
   useEffect(() => {
     getPixProducer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return pixProducer;
 };

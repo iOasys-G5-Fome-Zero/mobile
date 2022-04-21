@@ -64,3 +64,5 @@ export const StyledButtonEditProfile = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
 `;
+
+export const StyledBaseButton = styled.TouchableOpacity``;

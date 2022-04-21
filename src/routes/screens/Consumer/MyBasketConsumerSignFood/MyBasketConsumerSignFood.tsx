@@ -136,7 +136,7 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
       <Header title='Assinatura' nav={() => handleNavigate('MyBasketConsumerSignPlan')} />
       <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <StyledText size={14}>
-          {`Você escolheu a cesta de tamanho ${translateBasket(
+          {`Você escolheu a cesta de tamanho ${translateBasket.toPortuguese(
             route.params?.myBasket.basket_size
           )} (${getTotalItemsBasket(
             route.params?.myBasket.basket_size
@@ -163,6 +163,7 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
                 label={food.foodID.name}
                 image={food.foodID.imageUrl}
                 maxQuantity={food.quantity}
+                donation
               />
             ))
           ) : (
