@@ -13,7 +13,7 @@ import { api } from '../../../services/api';
 import Logo from '../../../assets/icons/logo.svg';
 
 // componets
-import { Input, Button, Checkbox, MaskedInput } from '../../../components';
+import { Input, Button, Checkbox, MaskedInput, ButtonInfoSite } from '../../../components';
 
 // styled componets
 import {
@@ -43,7 +43,6 @@ interface IForm {
 }
 
 const Login: React.FC = () => {
-  // const [checked, setChecked] = useState(false);
   const [error, setError] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(false);
   const formRef = useRef<FormHandles>(null);
@@ -198,6 +197,7 @@ const Login: React.FC = () => {
           </StyledButtonContainer>
         </StyledRow>
       </StyledContainerRegister>
+      <ButtonInfoSite />
     </StyledContainer>
   );
 };

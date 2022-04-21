@@ -4,7 +4,6 @@ import { Icon } from 'react-native-elements';
 import { Form } from '@unform/mobile';
 import { SubmitHandler } from '@unform/core';
 import { useGetMyCoins } from '../../../../hooks';
-// import { prettyLog } from '../../../../helpers';
 
 // mocks
 import { data_ongs } from '../../../../services/mocks';
@@ -14,7 +13,7 @@ import HortCoinIcon from '../../../../assets/icons/hort-coins.svg';
 import GrowthIcon from '../../../../assets/icons/growth.svg';
 
 // components
-import { Header, CardList, Button, Modal, Counter } from '../../../../components';
+import { Header, CardList, Button, Modal, Counter, ButtonInfoSite } from '../../../../components';
 import {
   StyledContainer,
   StyledContainerScroll,
@@ -45,7 +44,6 @@ const DonationConsumer: React.FC = () => {
       await schema.validate(data, { abortEarly: false });
       formRef.current.setErrors({});
 
-      // await sendDonation(data);
       setConfirmDonation(true);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
@@ -61,16 +59,6 @@ const DonationConsumer: React.FC = () => {
 
     setLoading(false);
   };
-
-  // const sendDonation = async () => {
-  //   try {
-  //     await api.post('/donations');
-
-  //     setConfirmDonation(true);
-  //   } catch (error) {
-  //     prettyLog('erro ao enviar a doação');
-  //   }
-  // };
 
   const returnModalConfirmDonation = () => {
     return (
@@ -159,32 +147,6 @@ const DonationConsumer: React.FC = () => {
     );
   };
 
-  const returnInfoSite = () => {
-    return (
-      <StyledContainerInfo>
-        <StyledText size={14} margin>
-          Para saber mais sobre os projetos e instituições que estamos ajudando, acesse o nosso
-          site.
-        </StyledText>
-        <Button
-          style={{
-            width: 100,
-            height: 40,
-            backgroundColor: 'transparent',
-            borderWidth: 1,
-            borderColor: '#00843F',
-            marginBottom: 0
-          }}
-          size={12}
-          fontColor='#262626'
-          onPress={() => null}
-        >
-          Ir para o site
-        </Button>
-      </StyledContainerInfo>
-    );
-  };
-
   return (
     <>
       <StyledContainer>
@@ -207,7 +169,7 @@ const DonationConsumer: React.FC = () => {
               setModalVisible(true);
             }}
           />
-          {returnInfoSite()}
+          <ButtonInfoSite />
         </StyledContainerScroll>
       </StyledContainer>
       {returnModalConfirmDonation()}

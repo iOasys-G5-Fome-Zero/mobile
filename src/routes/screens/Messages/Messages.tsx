@@ -1,4 +1,4 @@
-// vou deixar comentado pq ainda não teremos o chat nessa feature.
+// TODO: proxima feature
 
 // import React, { useState } from 'react';
 // import { Icon } from 'react-native-elements';

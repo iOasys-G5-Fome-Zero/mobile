@@ -1,4 +1,4 @@
-// vou deixar comentado pq ainda não teremos o chat nessa feature.
+// TODO: proxima feature
 
 // import styled from 'styled-components/native';
 // import { RFValue } from 'react-native-responsive-fontsize';

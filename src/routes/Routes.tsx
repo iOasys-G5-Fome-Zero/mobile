@@ -8,8 +8,8 @@ import { useAppSelector } from '../store/store';
 import Login from './screens/Login/Login';
 import Register from './screens/Register/Register';
 import Onboarding from './screens/Onboarding/Onboarding';
+import ConfirmRegister from './screens/ConfirmRegister/ConfirmRegister';
 import BasketProducer from './screens/Producer/BasketProducer/BasketProducer';
-// import Chat from './screens/Chat/Chat'; // TODO: proxima feature
 import Splash from './screens/Splash/Splash';
 
 import ProducerTabNavigator from './tabs/ProducerTabNavigator';
@@ -22,9 +22,11 @@ export type MainStackParams = {
   Splash: undefined;
   Login: undefined;
   Register: undefined;
+  ConfirmRegister: undefined;
   ProducerTabNavigator: undefined;
   ConsumerTabNavigator: undefined;
   Onboarding: undefined;
+  ButtonInfoSite: undefined;
   BasketProducer: undefined;
   WebView: undefined;
 };
@@ -48,7 +50,7 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='ConsumerTabNavigator'
+        initialRouteName='Splash'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }
@@ -59,6 +61,9 @@ const Routes: React.FC = () => {
             <Main.Screen name='Splash' component={Splash} />
             <Main.Screen name='Login' component={Login} />
             <Main.Screen name='Register' component={Register} />
+            <Main.Group screenOptions={{ presentation: 'modal' }}>
+              <Main.Screen name='ConfirmRegister' component={ConfirmRegister} />
+            </Main.Group>
           </>
         ) : (
           <>
