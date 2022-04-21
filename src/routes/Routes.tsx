@@ -56,17 +56,17 @@ const Routes: React.FC = () => {
           contentStyle: { backgroundColor: '#FFFFFF' }
         }}
       >
-        {logged ? (
+        {!logged ? (
           <>
             <Main.Screen name='Splash' component={Splash} />
             <Main.Screen name='Login' component={Login} />
             <Main.Screen name='Register' component={Register} />
-            <Main.Screen name='Onboarding' component={Onboarding} />
           </>
         ) : (
           <>
-            <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
+            <Main.Screen name='Onboarding' component={Onboarding} />
             <Main.Screen name='ConsumerTabNavigator' component={ConsumerTabNavigator} />
+            <Main.Screen name='ProducerTabNavigator' component={ProducerTabNavigator} />
             <Main.Screen name='BasketProducer' component={BasketProducer} />
             <Main.Screen name='WebView' component={WebView} />
             <Main.Screen name='Chat' component={Chat} />

@@ -13,7 +13,7 @@ import { IUserResponse } from '../../../@types/interfaces/User';
 import { IRegisterRequest, IRegisterResponse } from '../../../@types/interfaces/Register';
 
 // components
-import { Radio, Button, Input, Checkbox } from '../../../components';
+import { Radio, Button, Input, Checkbox, MaskedInput } from '../../../components';
 import { StyledContainer, StyledText, StyledLoading } from './styles';
 
 // types
@@ -37,7 +37,7 @@ const Register: React.FC = () => {
       const schemaRegiste = Yup.object().shape({
         userType: Yup.string().required('Obrigatório'),
         name: Yup.string().required('Obrigatório'),
-        email: Yup.string().required('Obrigatório'),
+        phone: Yup.string().required('Obrigatório'),
         password: Yup.string().required('Obrigatório'),
         checked: Yup.array().min(1, 'Você precisa aceitar os termos de uso').required()
       });
@@ -76,18 +76,20 @@ const Register: React.FC = () => {
 
       const firstName = formData.name.split(' ')[0];
 
+      const phoneString = formData.phone.replace(/[^0-9]/g, '');
+
       await api.post<IRegisterResponse>('/users/new-user/', {
         firstName,
         lastName,
         userType: formData.userType === 'Sou consumidor' ? 'consumer' : 'producer',
-        email: formData.email,
+        phone: phoneString,
         password: formData.password
       });
 
       const { data: dataUser } = await api.post(
         '/auth/login',
         {
-          phoneOrEmail: formData.email,
+          phoneOrEmail: phoneString,
           password: formData.password
         },
         { timeout: 10000 }
@@ -98,7 +100,7 @@ const Register: React.FC = () => {
       handleNavigation();
     } catch (error) {
       if (error.response.status === 409) {
-        handleMessage('E-mail já cadastrado');
+        handleMessage('Número de telefone já cadastrado');
       } else {
         handleError(error);
       }
@@ -139,7 +141,7 @@ const Register: React.FC = () => {
         <Radio name='userType' options={['Sou produtor', 'Sou consumidor']} size={14} />
 
         <Input name='name' placeholder='Nome' />
-        <Input name='email' placeholder='E-mail' />
+        <MaskedInput name='phone' placeholder='Telefone' type='cel-phone' />
         <Input name='password' placeholder='Senha' secureTextEntry />
         <StyledText style={{ marginBottom: 50 }} size={12}>
           A senha deve conter pelo menos 6 caracteres, incluindo letras e números.

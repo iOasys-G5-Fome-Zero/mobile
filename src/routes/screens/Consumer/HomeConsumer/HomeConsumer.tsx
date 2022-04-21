@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { useAppSelector } from '../../../../store/store';
 
 // mocks
-import { data_presentation, data_our_services, data_ongs } from '../../../../services/mocks';
+import { data_presentation, data_ongs } from '../../../../services/mocks';
 
 // components
 import { Header, CardList } from '../../../../components';

@@ -9,3 +9,4 @@ export { default as Counter } from './Form/Counter/Counter';
 export { default as Modal } from './Modal/Modal';
 export { default as PickerFile } from './Form/PickerFile/PickerFile';
 export { default as Checkbox } from './Form/Checkbox/Checkbox';
+export { default as MaskedInput } from './Form/MaskedInput/MaskedInput';

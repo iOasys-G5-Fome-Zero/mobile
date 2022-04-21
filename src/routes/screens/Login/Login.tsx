@@ -13,7 +13,7 @@ import { api } from '../../../services/api';
 import Logo from '../../../assets/icons/logo.svg';
 
 // componets
-import { Input, Button, Checkbox } from '../../../components';
+import { Input, Button, Checkbox, MaskedInput } from '../../../components';
 
 // styled componets
 import {
@@ -37,7 +37,7 @@ type NavProps = NativeStackNavigationProp<
 >;
 
 interface IForm {
-  email: string;
+  phone: string;
   password: string;
   checked?: boolean;
 }
@@ -54,10 +54,12 @@ const Login: React.FC = () => {
     setLoadingLogin(true);
 
     try {
+      const phoneString = data.phone.replace(/[^0-9]/g, '');
+
       const { data: dataUser } = await api.post(
         '/auth/login',
         {
-          phoneOrEmail: data.email,
+          phoneOrEmail: phoneString,
           password: data.password
         },
         { timeout: 10000 }
@@ -150,7 +152,7 @@ const Login: React.FC = () => {
         onSubmit={handleLogin}
       >
         <StyledErrorMessage>{error && 'Incorrect email or password'}</StyledErrorMessage>
-        <Input name='email' placeholder='E-mail' />
+        <MaskedInput name='phone' type='cel-phone' placeholder='Telefone' />
         <Input name='password' placeholder='Senha' secureTextEntry />
         <StyledContainerForgotPassword>
           <StyledText size={12}>Esqueceu a senha ?</StyledText>
