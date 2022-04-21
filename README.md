@@ -31,9 +31,22 @@ Incentivamos a agricultura artesanal e orgânica em apoio à pequenos e médios 
 # Tecnologias Usadas
 - React Native
 - TypeScript
-- NodeJS
-- Styled Components
-- Heroku
+
+# Bibliotecas Usadas
+- [Axios](https://axios-http.com/ptbr/docs/intro)
+- [Expo](https://expo.dev)
+- [React Navigation](https://reactnavigation.org)
+- [ReduxJS](https://redux.js.org)
+- [React Redux](https://react-redux.js.org)
+- [YUP](https://github.com/jquense/yup)
+- [Styled Components](https://styled-components.com)
+
+# Dependências 
+- [Eslint](https://eslint.org)
+- [Prettier](https://prettier.io)
+
+# iOasys Configuration Setup
+-[iOasys React Native Documentation](https://docs.dev.ioasys.com.br/native/)
 
 ## Instalação do APP 
 
