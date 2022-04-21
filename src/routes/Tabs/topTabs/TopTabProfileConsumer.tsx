@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import ProfileConsumerHome from '../../screens/Profile/Profile';
-import ProfileConsumerMessages from '../../screens/Messages/Messages';
+// import ProfileConsumerMessages from '../../screens/Messages/Messages'; // TODO: proxima feature
 
 export type TopTabProfileProducerStackParams = {
   ProfileProducerHome: undefined;
@@ -21,7 +21,6 @@ const TopTabProfileConsumer = () => {
       }}
     >
       <TopTab.Screen name='ProfileConsumerHome' component={ProfileConsumerHome} />
-      <TopTab.Screen name='ProfileConsumerMessages' component={ProfileConsumerMessages} />
     </TopTab.Navigator>
   );
 };

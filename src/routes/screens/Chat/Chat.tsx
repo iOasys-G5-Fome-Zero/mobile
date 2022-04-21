@@ -1,90 +1,92 @@
-import React, { useState } from 'react';
-import { RouteProp } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
+// vou deixar comentado pq ainda não teremos o chat nessa feature.
 
-// components
-import { Header } from '../../../components';
-import {
-  StyledContainer,
-  StyledText,
-  StyledContainerScroll,
-  StyledContainerInput,
-  StyledCotainerBoxInput,
-  StyledInput,
-  StyledBoxMessage,
-  StyleStyledContainerMessage
-} from './styles';
+// import React, { useState } from 'react';
+// import { RouteProp } from '@react-navigation/native';
+// import { Icon } from 'react-native-elements';
 
-// interface
-interface IProps {
-  route: RouteProp<{ params: { name: string } }, 'params'>;
-}
+// // components
+// import { Header } from '../../../components';
+// import {
+//   StyledContainer,
+//   StyledText,
+//   StyledContainerScroll,
+//   StyledContainerInput,
+//   StyledCotainerBoxInput,
+//   StyledInput,
+//   StyledBoxMessage,
+//   StyleStyledContainerMessage
+// } from './styles';
 
-interface IObjMessage {
-  message: string;
-  time: string;
-}
+// // interface
+// interface IProps {
+//   route: RouteProp<{ params: { name: string } }, 'params'>;
+// }
 
-const Chat: React.FC<IProps> = ({ route }) => {
-  const [newMessage, setNewMessage] = useState<string>('');
-  const [messages, setMessages] = useState<IObjMessage[]>([]);
+// interface IObjMessage {
+//   message: string;
+//   time: string;
+// }
 
-  const handleSendMessage = () => {
-    if (newMessage) {
-      const objNewMessage = {
-        message: newMessage,
-        time: new Date().toLocaleTimeString().substring(0, 5)
-      };
+// const Chat: React.FC<IProps> = ({ route }) => {
+//   const [newMessage, setNewMessage] = useState<string>('');
+//   const [messages, setMessages] = useState<IObjMessage[]>([]);
 
-      setMessages([...messages, objNewMessage]);
-    }
-    setNewMessage('');
-  };
+//   const handleSendMessage = () => {
+//     if (newMessage) {
+//       const objNewMessage = {
+//         message: newMessage,
+//         time: new Date().toLocaleTimeString().substring(0, 5)
+//       };
 
-  const returnMessages = (objMessage: IObjMessage, index: number) => {
-    return (
-      <StyleStyledContainerMessage key={index}>
-        <StyledBoxMessage>
-          <StyledText>{objMessage.message}</StyledText>
-        </StyledBoxMessage>
-        <StyledText size={12}>{objMessage.time}</StyledText>
-      </StyleStyledContainerMessage>
-    );
-  };
+//       setMessages([...messages, objNewMessage]);
+//     }
+//     setNewMessage('');
+//   };
 
-  const returnInputChat = () => {
-    return (
-      <StyledContainerInput>
-        <StyledCotainerBoxInput>
-          <StyledInput
-            onChangeText={setNewMessage}
-            value={newMessage}
-            placeholder='Digite sua mensagem'
-            onSubmitEditing={() => handleSendMessage()}
-            keyboardType='twitter'
-          />
-          <Icon
-            type='font-awesome'
-            name='send'
-            color='#262626'
-            size={18}
-            onPress={() => handleSendMessage()}
-            tvParallaxProperties={undefined}
-          />
-        </StyledCotainerBoxInput>
-      </StyledContainerInput>
-    );
-  };
+//   const returnMessages = (objMessage: IObjMessage, index: number) => {
+//     return (
+//       <StyleStyledContainerMessage key={index}>
+//         <StyledBoxMessage>
+//           <StyledText>{objMessage.message}</StyledText>
+//         </StyledBoxMessage>
+//         <StyledText size={12}>{objMessage.time}</StyledText>
+//       </StyleStyledContainerMessage>
+//     );
+//   };
 
-  return (
-    <StyledContainer>
-      <Header title={route.params?.name} />
-      <StyledContainerScroll showsVerticalScrollIndicator={false}>
-        {messages && messages.map((objMessage, index) => returnMessages(objMessage, index))}
-      </StyledContainerScroll>
-      {returnInputChat()}
-    </StyledContainer>
-  );
-};
+//   const returnInputChat = () => {
+//     return (
+//       <StyledContainerInput>
+//         <StyledCotainerBoxInput>
+//           <StyledInput
+//             onChangeText={setNewMessage}
+//             value={newMessage}
+//             placeholder='Digite sua mensagem'
+//             onSubmitEditing={() => handleSendMessage()}
+//             keyboardType='twitter'
+//           />
+//           <Icon
+//             type='font-awesome'
+//             name='send'
+//             color='#262626'
+//             size={18}
+//             onPress={() => handleSendMessage()}
+//             tvParallaxProperties={undefined}
+//           />
+//         </StyledCotainerBoxInput>
+//       </StyledContainerInput>
+//     );
+//   };
 
-export default Chat;
+//   return (
+//     <StyledContainer>
+//       <Header title={route.params?.name} />
+//       <StyledContainerScroll showsVerticalScrollIndicator={false}>
+//         {messages && messages.map((objMessage, index) => returnMessages(objMessage, index))}
+//       </StyledContainerScroll>
+//       {returnInputChat()}
+//     </StyledContainer>
+//   );
+// };
+
+// export default Chat;
