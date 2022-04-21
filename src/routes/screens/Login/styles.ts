@@ -15,6 +15,12 @@ export const StyledContainer = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+export const StyledContainerScroll = styled.ScrollView`
+  width: 90%;
+  padding: 40px 0;
 `;
 
 export const StyledTitle = styled.Text`

@@ -24,7 +24,8 @@ import {
   StyledRow,
   StyledButtonContainer,
   StyledErrorMessage,
-  StyledLoading
+  StyledLoading,
+  StyledContainerScroll
 } from './styles';
 
 // types
@@ -140,64 +141,65 @@ const Login: React.FC = () => {
 
   return (
     <StyledContainer>
-      <Logo style={{ marginVertical: 80 }} />
-      <Form
-        style={{ width: '85%' }}
-        initialData={{
-          email: '',
-          password: ''
-        }}
-        ref={formRef}
-        onSubmit={handleLogin}
-      >
-        <StyledErrorMessage>{error && 'Incorrect email or password'}</StyledErrorMessage>
-        <MaskedInput name='phone' type='cel-phone' placeholder='Telefone' />
-        <Input name='password' placeholder='Senha' secureTextEntry />
-        <StyledContainerForgotPassword>
-          <StyledText size={12}>Esqueceu a senha ?</StyledText>
-          <StyledButtonContainer>
-            <StyledText size={12} bold link>
-              Recupera senha
-            </StyledText>
-          </StyledButtonContainer>
-        </StyledContainerForgotPassword>
+      <StyledContainerScroll showsVerticalScrollIndicator={false}>
+        <Logo style={{ marginVertical: 80, alignSelf: 'center' }} />
+        <Form
+          initialData={{
+            email: '',
+            password: ''
+          }}
+          ref={formRef}
+          onSubmit={handleLogin}
+        >
+          <StyledErrorMessage>{error && 'Incorrect email or password'}</StyledErrorMessage>
+          <MaskedInput name='phone' type='cel-phone' placeholder='Telefone' />
+          <Input name='password' placeholder='Senha' secureTextEntry />
+          <StyledContainerForgotPassword>
+            <StyledText size={12}>Esqueceu a senha ?</StyledText>
+            <StyledButtonContainer>
+              <StyledText size={12} bold link>
+                Recupera senha
+              </StyledText>
+            </StyledButtonContainer>
+          </StyledContainerForgotPassword>
 
-        <Checkbox name='checked' size={14} options={['Lembrar minha senha']} />
-      </Form>
+          <Checkbox name='checked' size={14} options={['Lembrar minha senha']} />
+        </Form>
 
-      <Button
-        style={{ marginBottom: 60, marginTop: 20 }}
-        size={14}
-        onPress={() => formRef.current.submitForm()}
-      >
-        {loadingLogin ? <StyledLoading size='small' color='#fff' /> : 'Entrar'}
-      </Button>
-      <StyledContainerRegister>
-        <StyledRow>
-          <StyledText>Ainda não tem uma conta? </StyledText>
-          <StyledButtonContainer>
-            <StyledText bold link onPress={() => navigation.navigate('Register')}>
-              Cadastre-se aqui
-            </StyledText>
-          </StyledButtonContainer>
-        </StyledRow>
-        <StyledRow>
-          <StyledText>Deseja registrar uma ONG? </StyledText>
-          <StyledButtonContainer>
-            <StyledText
-              bold
-              link
-              onPress={() => {
-                dispatch(setWeb({ url: 'https://powerhungers.netlify.app/', go: true }));
-                navigation.navigate('WebView');
-              }}
-            >
-              Clique aqui
-            </StyledText>
-          </StyledButtonContainer>
-        </StyledRow>
-      </StyledContainerRegister>
-      <ButtonInfoSite />
+        <Button
+          style={{ marginBottom: 60, marginTop: 20, alignSelf: 'center' }}
+          size={14}
+          onPress={() => formRef.current.submitForm()}
+        >
+          {loadingLogin ? <StyledLoading size='small' color='#fff' /> : 'Entrar'}
+        </Button>
+        <StyledContainerRegister>
+          <StyledRow>
+            <StyledText>Ainda não tem uma conta? </StyledText>
+            <StyledButtonContainer>
+              <StyledText bold link onPress={() => navigation.navigate('Register')}>
+                Cadastre-se aqui
+              </StyledText>
+            </StyledButtonContainer>
+          </StyledRow>
+          <StyledRow>
+            <StyledText>Deseja registrar uma ONG? </StyledText>
+            <StyledButtonContainer>
+              <StyledText
+                bold
+                link
+                onPress={() => {
+                  dispatch(setWeb({ url: 'https://powerhungers.netlify.app/', go: true }));
+                  navigation.navigate('WebView');
+                }}
+              >
+                Clique aqui
+              </StyledText>
+            </StyledButtonContainer>
+          </StyledRow>
+        </StyledContainerRegister>
+        <ButtonInfoSite />
+      </StyledContainerScroll>
     </StyledContainer>
   );
 };
