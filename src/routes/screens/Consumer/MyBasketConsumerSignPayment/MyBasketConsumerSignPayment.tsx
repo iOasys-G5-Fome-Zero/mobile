@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import * as Yup from 'yup';
 import Clipboard from '@react-native-community/clipboard';
+import { Linking } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Form } from '@unform/mobile';
 import { FormHandles, SubmitHandler } from '@unform/core';
@@ -18,7 +19,7 @@ import { BottomTabConsumerParams } from '../../../tabs/ConsumerTabNavigator';
 import BasketVegetableIcon from '../../../../assets/icons/vegetable-basket.svg';
 
 // components
-import { Header, Radio, Button, Modal, PickerFile } from '../../../../components';
+import { Header, Radio, Button, Modal } from '../../../../components';
 import {
   StyledContainer,
   StyledTitle,
@@ -28,7 +29,8 @@ import {
   StyledRow,
   StyledContainerCloseModal,
   StyledCircle,
-  StyledLoading
+  StyledLoading,
+  StyledColumn
 } from './styles';
 
 // interfaces
@@ -57,7 +59,6 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
         delivery: Yup.string().required('Selecione uma opção de entrega'),
         file: Yup.object()
           .shape({
-            file: Yup.string().required(),
             name: Yup.string().required()
           })
           .required('Obrigatório')
@@ -68,9 +69,6 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
 
       // remove as comidas da cesta para doação
       await setRemovedFood();
-
-      // envia compravante de pagamento
-      await sendReceipt({ file: data.file });
 
       setModalVisible(true);
     } catch (error) {
@@ -105,31 +103,14 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
 
       prettyLog('removeu as comidas da cesta');
     } catch (error) {
-      prettyLog(error.response);
+      // prettyLog(error.response);
 
-      // preciso de ajuda
       prettyLog('erro ao remover as comidas');
     }
   };
 
-  const sendReceipt = async ({ file }) => {
-    try {
-      const data = new FormData();
-      data.append('file', file);
-
-      await api.post(`/consumers/receipt/upload`, data, {
-        headers: {
-          'Content-Type': `multipart/form-data`
-        }
-      });
-
-      prettyLog('enviou comprovante');
-    } catch (error) {
-      prettyLog(error.response);
-
-      // preciso de ajuda
-      prettyLog('erro ao enviar o comprovante');
-    }
+  const WhatsAppLink = () => {
+    Linking.openURL(`whatsapp://send?phone=5511996722472`);
   };
 
   const returnModal = () => {
@@ -159,32 +140,34 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
           notificação??
         </StyledText>
 
-        <StyledRow>
+        <StyledColumn>
           <Button
-            style={{
-              backgroundColor: 'transparent',
-              width: 99,
-              height: 38,
-              marginRight: 10
-            }}
-            size={14}
-            fontColor='#00843F'
-            onPress={() => setModalVisible(false)}
-          >
-            Cancelar
-          </Button>
-          <Button
-            style={{ marginLeft: 10, width: 99, height: 38 }}
-            size={14}
+            style={{ width: 140, height: 38 }}
+            size={12}
             onPress={async () => {
+              WhatsAppLink();
               setModalVisible(false);
               navigation.goBack();
               navigation.navigate('HomeConsumer');
             }}
           >
-            Confirmar
+            Ir para mensagens
           </Button>
-        </StyledRow>
+          <Button
+            style={{
+              backgroundColor: '#fff',
+              borderWidth: 1,
+              borderColor: '#00843F',
+              width: 140,
+              height: 38
+            }}
+            size={12}
+            fontColor='#00843F'
+            onPress={() => setModalVisible(false)}
+          >
+            Ir para doaçoes
+          </Button>
+        </StyledColumn>
       </Modal>
     );
   };
@@ -248,7 +231,6 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
               />
             </StyledRow>
           </StyledBox>
-          <PickerFile name='file' title='Anexar comprovante' style={{ alignSelf: 'center' }} />
         </Form>
         <Button
           style={{ alignSelf: 'center', marginBottom: 60 }}

@@ -40,6 +40,8 @@ export const StyledBox = styled.View`
 
 export const StyledButton = styled.TouchableOpacity``;
 
+export const StyledColumn = styled.View``;
+
 export const StyledRow = styled(Row)<IPropsRow>`
   justify-content: ${({ between }) => (between ? 'space-between' : 'flex-start')};
 `;
