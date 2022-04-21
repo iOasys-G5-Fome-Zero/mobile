@@ -35,20 +35,6 @@ const ProfileConsumer: React.FC = () => {
     navigation.navigate('Login');
   };
 
-  const handleNavigate = () => {
-    const type = user.userType;
-
-    if (type === 'consumer') {
-      const jumpToSignFood = TabActions.jumpTo('ProfileConsumerMessages');
-      navigation.dispatch(jumpToSignFood);
-    }
-
-    if (type === 'producer') {
-      const jumpToSignFood = TabActions.jumpTo('ProfileProducerMessages');
-      navigation.dispatch(jumpToSignFood);
-    }
-  };
-
   const handleNavigatePlan = () => {
     const type = user.userType;
 
@@ -59,6 +45,10 @@ const ProfileConsumer: React.FC = () => {
     if (type === 'producer') {
       navigationProducer.navigate('FinancialProducer');
     }
+  };
+
+  const WhatsAppLink = () => {
+    Linking.openURL(`whatsapp://send?phone=5511996722472`);
   };
 
   return (
@@ -103,9 +93,9 @@ const ProfileConsumer: React.FC = () => {
           iconColor='#262626'
           iconSize={16}
           big
-          onPress={() => handleNavigate()}
+          onPress={() => WhatsAppLink()}
         >
-          Mensagens
+          Contactar produtor
         </Button>
         <Button
           style={{

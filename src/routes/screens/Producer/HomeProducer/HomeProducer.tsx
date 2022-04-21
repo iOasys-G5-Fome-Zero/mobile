@@ -43,7 +43,7 @@ const HomeProducer: React.FC = () => {
   };
   return (
     <StyledContainer>
-      <Header title={user.firstName} welcome message />
+      <Header title={user.firstName} welcome />
       <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <StyledTitle size={16} bold>
           Minhas cestas

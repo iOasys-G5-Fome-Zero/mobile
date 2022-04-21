@@ -46,7 +46,7 @@ const HomeConsumer: React.FC = () => {
 
   return (
     <StyledContainer>
-      <Header title={user.firstName} welcome message />
+      <Header title={user.firstName} welcome />
       <StyledContainerScroll showsVerticalScrollIndicator={false}>
         <StyledSwiper
           horizontal
