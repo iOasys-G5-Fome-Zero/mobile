@@ -5,6 +5,10 @@
 
 Incentivamos a agricultura artesanal e orgânica em apoio à pequenos e médios produtores familiares que necessitam aumentar sua fonte de renda promovendo a participação social local na distribuição dos mesmos alimentos adquiridos na assinatura, à quem se encontra em situação de fome.
 
+![My animated Preview](src/assets/images/APP_CESTOU.gif)
+<img src="src/assets/images/APP_CESTOU.gif" align="right" width="32%"/>
+
+
 # Features da Aplicação
 - Cadastro de Usuário e Login
 - Perfil do Usuário 
