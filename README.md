@@ -29,7 +29,6 @@ Incentivamos a agricultura artesanal e orgânica em apoio à pequenos e médios 
 > e ainda consegue doar moedas para ajudar instituições com os produtos que ele não deseja da cesta
 
 # Tecnologias Usadas
-## Nossa aplicação roda dentro do Heroku
 - React Native
 - TypeScript
 - NodeJS
