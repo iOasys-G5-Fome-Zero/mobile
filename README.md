@@ -46,7 +46,7 @@ Incentivamos a agricultura artesanal e orgânica em apoio à pequenos e médios 
 - [Prettier](https://prettier.io)
 
 # iOasys Configuration Setup
--[iOasys React Native Documentation](https://docs.dev.ioasys.com.br/native/)
+- [iOasys React Native Documentation](https://docs.dev.ioasys.com.br/native/)
 
 ## Instalação do APP 
 
