@@ -81,7 +81,7 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='Onboarding'
+        initialRouteName='Splash'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }

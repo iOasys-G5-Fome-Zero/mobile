@@ -8,6 +8,7 @@ import { MainStackParams } from '../../routes/Routes';
 
 // icons
 import Logo from '../../assets/icons/logo.svg';
+import LogoBasket from '../../assets/icons/logo-basket.svg';
 
 // types
 type NavProps = NativeStackNavigationProp<MainStackParams, 'Login'>;
@@ -55,12 +56,22 @@ const Splash: React.FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'flex-end' }}>
+      <Animated.View style={[animatedLogo]} />
       <Animated.View style={[animatedLogo]}>
+        <LogoBasket
+          width={width * 0.5}
+          height={height * 0.08}
+          style={{
+            top: height * 0.7,
+            left: width * 0.25,
+            zIndex: 1
+          }}
+        />
         <Logo
           width={width * 0.5}
-          height={height * 0.5}
+          height={height * 0.08}
           style={{
-            top: height * 0.75,
+            top: height * 0.7,
             left: width * 0.25,
             zIndex: 1
           }}
