@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setLogged } from '../../store';
 import { BottomTabConsumerParams } from '../../routes/tabs/ConsumerTabNavigator';
 import { BottomTabProducerParams } from '../../routes/tabs/ProducerTabNavigator';
+import { useGetMyBasket } from '../../hooks';
 
 // components
 import { Button, Header } from '../../components';
@@ -23,6 +24,7 @@ const ProfileConsumer: React.FC = () => {
   const navigationProducer = useNavigation<NavPropsProducer>();
   const navigationConsumer = useNavigation<NavPropsConsumer>();
   const user = useAppSelector(state => state.userReducer.user);
+  const myBasket = useGetMyBasket();
   const dispatch = useAppDispatch();
 
   const { width } = Dimensions.get('window');
@@ -48,7 +50,7 @@ const ProfileConsumer: React.FC = () => {
   };
 
   const WhatsAppLink = () => {
-    Linking.openURL(`whatsapp://send?phone=5511996722472`);
+    Linking.openURL(`whatsapp://send?phone=55${myBasket.basketProducerID.userID.phone}`);
   };
 
   return (
@@ -84,19 +86,23 @@ const ProfileConsumer: React.FC = () => {
         >
           Configurar plano
         </Button>
-        <Button
-          style={{ marginBottom: 10, width: width * 0.9, paddingHorizontal: 20 }}
-          size={14}
-          fontColor='#262626'
-          iconType='material'
-          iconName='arrow-forward-ios'
-          iconColor='#262626'
-          iconSize={16}
-          big
-          onPress={() => WhatsAppLink()}
-        >
-          Contactar produtor
-        </Button>
+        {user.userType === 'consumer' && myBasket.basketProducerID.userID.phone && (
+          <Button
+            style={{ marginBottom: 10, width: width * 0.9, paddingHorizontal: 20 }}
+            size={14}
+            fontColor='#262626'
+            iconType='material'
+            iconName='arrow-forward-ios'
+            iconColor='#262626'
+            iconSize={16}
+            big
+            onPress={() => {
+              WhatsAppLink();
+            }}
+          >
+            Contactar produtor
+          </Button>
+        )}
         <Button
           style={{
             width: 120,

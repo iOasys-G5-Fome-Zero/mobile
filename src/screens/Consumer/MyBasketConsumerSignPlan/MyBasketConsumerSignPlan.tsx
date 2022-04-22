@@ -19,7 +19,6 @@ const MyBasketConsumerSignPlan: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
-
   const handlePlan = async (data: any) => {
     setLoading(true);
 

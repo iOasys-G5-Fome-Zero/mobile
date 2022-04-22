@@ -1,4 +1,4 @@
-// TODO: proxima feature
+// TODO: coming soon in the next feature
 
 // import React, { useState } from 'react';
 // import { RouteProp } from '@react-navigation/native';

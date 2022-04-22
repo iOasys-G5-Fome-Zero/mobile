@@ -7,8 +7,8 @@ import { Form } from '@unform/mobile';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { RouteProp, TabActions, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useGetPixProducer } from '../../../hooks';
-import { prettyLog, translateBasket } from '../../../helpers';
+import { useGetPhoneProducer, useGetPixProducer } from '../../../hooks';
+import { handleMessage, prettyLog, translateBasket } from '../../../helpers';
 import { api } from '../../../services/api';
 import { IProducerBaskets } from '../../../@types/interfaces/Basket';
 import { IDelivery } from '../../../@types/interfaces/Delivery';
@@ -50,9 +50,10 @@ interface IProps {
 const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const phoneProducer = useGetPhoneProducer(route.params?.myBasket.user_id);
+  const pixProducer = useGetPixProducer();
   const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation<NavProps>();
-  const pixProducer = useGetPixProducer();
 
   const handlePayment: SubmitHandler<IDelivery> = async data => {
     setLoading(true);
@@ -108,7 +109,7 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
   };
 
   const WhatsAppLink = () => {
-    Linking.openURL(`whatsapp://send?phone=5511996722472`);
+    Linking.openURL(`whatsapp://send?phone=55${phoneProducer}`);
   };
 
   const returnModal = () => {
@@ -143,9 +144,13 @@ const MyBasketConsumerSignPayment: React.FC<IProps> = ({ route }) => {
             style={{ width: 140, height: 38 }}
             size={12}
             onPress={async () => {
-              WhatsAppLink();
-              setModalVisible(false);
-              navigation.goBack();
+              if (phoneProducer) {
+                WhatsAppLink();
+                setModalVisible(false);
+                navigation.goBack();
+              } else {
+                handleMessage('Esse produtor ainda não cadastrou seu número de Whatsapp');
+              }
             }}
           >
             Ir para mensagens
