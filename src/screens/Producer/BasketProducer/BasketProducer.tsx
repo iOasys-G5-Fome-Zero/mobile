@@ -131,7 +131,7 @@ const BasketProducer: React.FC = () => {
         </StyledCircle>
 
         <StyledText size={16} textAlign='center' bold color='#00843F'>
-          Você adicionou as Cestas P e M à sua lista de produtos fornecidos.
+          Você selecionou as cestas com sucesso!
         </StyledText>
 
         <StyledRow>

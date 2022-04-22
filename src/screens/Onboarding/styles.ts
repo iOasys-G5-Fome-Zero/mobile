@@ -17,9 +17,7 @@ export const StyledContainer = styled.View`
 `;
 export const StyledImage = styled.Image`
   width: ${width}px;
-  height: ${height * 0.6}px;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
+  height: ${height * 0.5}px;
 `;
 
 export const StyledText = styled.Text<ITextProps>`
