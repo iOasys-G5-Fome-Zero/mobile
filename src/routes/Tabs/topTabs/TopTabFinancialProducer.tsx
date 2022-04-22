@@ -5,7 +5,7 @@ import {
   FinancialProducerHome,
   FinancialProducerExtract,
   FinancialProducerRegisterPix
-} from '../../screens/Producer';
+} from '../../../screens/Producer';
 
 export type TopTabFinancialProducerParams = {
   FinancialProducerHome: undefined;

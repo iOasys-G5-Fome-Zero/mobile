@@ -5,7 +5,7 @@ import {
   MyBasketConsumerSignPlan,
   MyBasketConsumerSignFood,
   MyBasketConsumerSignPayment
-} from '../../screens/Consumer';
+} from '../../../screens/Consumer';
 
 export type TopTabMyBasketConsumerParams = {
   MyBasketConsumerSignPlan: undefined;

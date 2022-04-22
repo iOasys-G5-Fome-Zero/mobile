@@ -20,6 +20,8 @@ export const StyledContainerCheck = styled.View`
 export const ErrorMessage = styled.Text`
   font-size: ${RFValue(10)}px;
   font-weight: bold;
+  color: ${({ theme }) => theme.colors.error};
+  margin-bottom: 3px;
 `;
 
 export const CheckButton = styled.TouchableOpacity`

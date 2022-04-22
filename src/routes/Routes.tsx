@@ -5,13 +5,12 @@ import { StatusBar } from 'react-native';
 import { useAppSelector } from '../store/store';
 
 // screens
-import Login from './screens/Login/Login';
-import Register from './screens/Register/Register';
-import Onboarding from './screens/Onboarding/Onboarding';
-import ConfirmRegister from './screens/ConfirmRegister/ConfirmRegister';
-import BasketProducer from './screens/Producer/BasketProducer/BasketProducer';
-import Splash from './screens/Splash/Splash';
-
+import Login from '../screens/Login/Login';
+import Register from '../screens/Register/Register';
+import Onboarding from '../screens/Onboarding/Onboarding';
+import ConfirmRegister from '../screens/ConfirmRegister/ConfirmRegister';
+import BasketProducer from '../screens/Producer/BasketProducer/BasketProducer';
+import Splash from '../screens/Splash/Splash';
 import ProducerTabNavigator from './tabs/ProducerTabNavigator';
 import ConsumerTabNavigator from './tabs/ConsumerTabNavigator';
 
@@ -26,7 +25,6 @@ export type MainStackParams = {
   ProducerTabNavigator: undefined;
   ConsumerTabNavigator: undefined;
   Onboarding: undefined;
-  ButtonInfoSite: undefined;
   BasketProducer: undefined;
   WebView: undefined;
 };
@@ -36,7 +34,6 @@ const Main = createNativeStackNavigator<MainStackParams>();
 const Routes: React.FC = () => {
   const goWeb = useAppSelector(state => state.webReducer.go);
   const user = useAppSelector(state => state.userReducer.user);
-  const newUser = useAppSelector(state => state.userReducer.newUser);
   const logged = useAppSelector(state => state.userReducer.logged);
 
   useEffect(() => {
@@ -84,7 +81,7 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Main.Navigator
-        initialRouteName='Splash'
+        initialRouteName='ConsumerTabNavigator'
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: '#FFFFFF' }

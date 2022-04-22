@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import ProfileProducerHome from '../../screens/Profile/Profile';
+import ProfileProducerHome from '../../../screens/Profile/Profile';
 // import ProfileProducerMessages from '../../screens/Messages/Messages'; // TODO: proxima feature
 
 export type TopTabProfileProducerStackParams = {
