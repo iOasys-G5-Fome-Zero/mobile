@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import { TabActions, useNavigation } from '@react-navigation/native';
-import { handleError, getDefaulSize, getDefaultFrequency, prettyLog } from '../../../helpers';
+import { handleError, getDefaulSize, getDefaultFrequency } from '../../../helpers';
 import { api } from '../../../services/api';
 
 // componets
@@ -86,10 +86,9 @@ const MyBasketConsumerSignPlan: React.FC = () => {
         basketID,
         producerID
       });
-
-      prettyLog('assinou o plano');
+      
     } catch (error) {
-      prettyLog('erro ao assinar o plano');
+      handleError(error);
     }
   };
 
