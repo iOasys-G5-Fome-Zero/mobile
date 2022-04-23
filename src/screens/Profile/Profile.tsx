@@ -86,7 +86,7 @@ const ProfileConsumer: React.FC = () => {
         >
           Configurar plano
         </Button>
-        {user.userType === 'consumer' && myBasket.basketProducerID.userID.phone && (
+        {user.userType === 'consumer' && myBasket?.basketProducerID.userID.phone && (
           <Button
             style={{ marginBottom: 10, width: width * 0.9, paddingHorizontal: 20 }}
             size={14}

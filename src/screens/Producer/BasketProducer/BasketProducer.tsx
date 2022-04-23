@@ -4,7 +4,7 @@ import { Form } from '@unform/mobile';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { SubmitHandler } from '@unform/core';
-import { handleError, handleMessage, prettyLog, translateBasket } from '../../../helpers';
+import { handleError, prettyLog, translateBasket } from '../../../helpers';
 import { api } from '../../../services/api';
 
 // icons
@@ -102,10 +102,8 @@ const BasketProducer: React.FC = () => {
         });
       });
 
-      handleMessage('Cestas selecionadas com sucesso');
+      prettyLog(ids);
     } catch (error) {
-      prettyLog(error.response);
-
       handleError(error);
     }
 
@@ -152,11 +150,11 @@ const BasketProducer: React.FC = () => {
             style={{ marginLeft: 10, width: 99, height: 38 }}
             size={14}
             onPress={async () => {
-              setIsOpenModal(false);
               navigation.goBack();
+              setIsOpenModal(false);
             }}
           >
-            {loading ? <StyledLoading size='small' color='#fff' /> : 'Confirmar'}
+            Confirmar
           </Button>
         </StyledRow>
       </Modal>
@@ -185,7 +183,7 @@ const BasketProducer: React.FC = () => {
           size={14}
           onPress={() => formRef.current.submitForm()}
         >
-          Selecionar
+          {loading ? <StyledLoading size='small' color='#fff' /> : 'Selecionar'}
         </Button>
       </>
     );

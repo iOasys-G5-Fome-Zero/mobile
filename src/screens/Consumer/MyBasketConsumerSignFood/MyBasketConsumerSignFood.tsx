@@ -87,12 +87,12 @@ const MyBasketConsumerSignFood: React.FC<IProps> = ({ route }) => {
         </StyledCircle>
 
         <StyledText size={16} textAlign='center' bold color='#00843F'>
-          {`Você está doando ${quantityFoodsDonation} itens da sua cesta`}
+          {`Você retirou ${quantityFoodsDonation} item da sua cesta!`}
         </StyledText>
 
         <StyledText size={14} textAlign='center'>
-          Estes itens serão doados para uma instituição que atua no combate a fome. Você pode
-          escolher para qual instituição doar na seção de Doações.
+          Este item será convertido na moeda Horticoin, e você poderá doá-la para uma instituição
+          parceira que atua no combate a fome.
         </StyledText>
 
         <StyledRow>
