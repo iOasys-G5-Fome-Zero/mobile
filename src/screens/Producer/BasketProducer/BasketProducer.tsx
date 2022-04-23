@@ -4,7 +4,7 @@ import { Form } from '@unform/mobile';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { SubmitHandler } from '@unform/core';
-import { handleError, prettyLog, translateBasket } from '../../../helpers';
+import { handleError, translateBasket } from '../../../helpers';
 import { api } from '../../../services/api';
 
 // icons
@@ -71,8 +71,6 @@ const BasketProducer: React.FC = () => {
 
       return data;
     } catch (error) {
-      prettyLog(error.response);
-
       handleError(error);
     }
   };
@@ -101,8 +99,6 @@ const BasketProducer: React.FC = () => {
           basketID: id
         });
       });
-
-      prettyLog(ids);
     } catch (error) {
       handleError(error);
     }
