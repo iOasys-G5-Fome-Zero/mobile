@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 import { Form } from '@unform/mobile';
 import { SubmitHandler } from '@unform/core';
 import { useNavigation } from '@react-navigation/native';
-import { handleError, prettyLog } from '../../../helpers';
+import { handleError } from '../../../helpers';
 import { api } from '../../../services/api';
 
 // icons
