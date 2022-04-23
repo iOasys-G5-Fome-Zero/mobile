@@ -11,7 +11,13 @@ const UserSlice = createSlice({
       avatar: '',
       userType: ''
     },
-    logged: false
+    logged: false,
+    newUser: false,
+    myBasket: {
+      basket_id: '',
+      producer_id: '',
+      basket_size: ''
+    }
   },
   reducers: {
     setUser: (state, { payload }) => {

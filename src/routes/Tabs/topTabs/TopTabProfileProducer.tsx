@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import ProfileProducerHome from '../../screens/Profile/Profile';
-import ProfileProducerMessages from '../../screens/Messages/Messages';
+import ProfileProducerHome from '../../../screens/Profile/Profile';
+// import ProfileProducerMessages from '../../screens/Messages/Messages'; // TODO: proxima feature
 
 export type TopTabProfileProducerStackParams = {
   ProfileProducerHome: undefined;
@@ -21,7 +21,6 @@ const TopTabProfileProducer = () => {
       }}
     >
       <TopTab.Screen name='ProfileProducerHome' component={ProfileProducerHome} />
-      <TopTab.Screen name='ProfileProducerMessages' component={ProfileProducerMessages} />
     </TopTab.Navigator>
   );
 };

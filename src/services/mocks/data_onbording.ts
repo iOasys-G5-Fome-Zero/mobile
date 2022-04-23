@@ -1,24 +1,24 @@
-import image_onbording_1 from '../../assets/images/onboarding/onboarding_1.jpg';
-import image_onbording_2 from '../../assets/images/onboarding/onboarding_2.jpg';
-import image_onbording_3 from '../../assets/images/onboarding/onboarding_3.jpg';
+import image_onbording_1 from '../../assets/images/onboarding/onboarding-1.png';
+import image_onbording_2 from '../../assets/images/onboarding/onboarding-2.png';
+import image_onbording_3 from '../../assets/images/onboarding/onboarding-3.png';
 
 const data_onbording = [
   {
     key: 'one',
-    title: 'Uma forma fácil de se \n conectar aos consumidores',
-    text: 'Através do nosso aplicativo você poderá vender seus \nalimentos para a comunidade local, sem depender de \n atravessadores.',
+    title: 'Tire a fome do caminho',
+    text: 'Alimentação é direito básico e a sua partilha é fundamental à quem tem fome. Através da assinatura mensal, você garante alimentação saudável democratizada pra sua família e ainda possibilita o mesmo consumo pra uma família em vulnerabilidade.',
     image: image_onbording_1
   },
   {
     key: 'two',
-    title: 'Nós prezamos pela agricultura familiar',
-    text: 'Você como agricultor, que não usa agrotóxicos e\n que preza pelo meio ambiente, tem um papel\n importante na alimentação das pessoas.',
+    title: 'Agricultura familiar presente',
+    text: 'Conecte-se com produtores familiares da sua região. Você fortalece a produção de pequenos produtores locais e recebe alimentos frescos e cultivados com muito carinho e cuidado.',
     image: image_onbording_2
   },
   {
     key: 'three',
-    title: 'Cesta Solidária',
-    text: 'Sendo um produtor credenciado, além de vender\n localmente, você também ajuda e incentiva doações\n para pessoas em situação de fome.',
+    title: 'Alimentação saudável ao seu alcance',
+    text: 'Aqui você encontra alimentos totalmente livres de agrotóxicos e perto de você!',
     image: image_onbording_3
   }
 ];

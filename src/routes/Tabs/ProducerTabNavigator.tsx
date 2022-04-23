@@ -7,7 +7,7 @@ import DonationsIcon from '../../assets/icons/donations-icon.svg';
 import ProfileIcon from '../../assets/icons/profile-icon.svg';
 
 // screens
-import { HomeProducer } from '../screens/Producer';
+import { HomeProducer } from '../../screens/Producer';
 
 // top tabs
 import { TopTabFinancialProducer, TopTabProfileProducer } from './topTabs';

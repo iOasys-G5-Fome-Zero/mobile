@@ -49,4 +49,5 @@ export const ErrorMessage = styled.Text`
   margin-bottom: 3px;
   font-size: ${RFValue(10)}px;
   font-weight: bold;
+  color: ${({ theme }) => theme.colors.error};
 `;

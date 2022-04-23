@@ -23,8 +23,8 @@ const App = () => {
     <Provider store={store}>
       <SafeAreaProvider>
         <StyledThemeProvider theme={defaultTheme}>
-          <Routes />
           <StatusBar style='dark' animated={false} backgroundColor='#6CCD91' />
+          <Routes />
         </StyledThemeProvider>
       </SafeAreaProvider>
     </Provider>

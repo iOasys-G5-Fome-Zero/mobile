@@ -8,7 +8,7 @@ import DonationsIcon from '../../assets/icons/donations-icon.svg';
 import ProfileIcon from '../../assets/icons/profile-icon.svg';
 
 // screens
-import { HomeConsumer, DonationsConsumer } from '../screens/Consumer';
+import { HomeConsumer, DonationsConsumer } from '../../screens/Consumer';
 
 // top tabs
 import { TopTabMyBasketConsumer, TopTabProfileConsumer } from './topTabs';

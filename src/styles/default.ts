@@ -7,7 +7,7 @@ const themeDefault = {
     lightGray: '#DDE0EA',
     white: '#FFFFFF',
     black: '#262626',
-    error: '#FF0000',
+    error: '#781B1C',
     warning: '#FFD53D',
     primary: '#00843F',
     secundary: '#6CCD91',
